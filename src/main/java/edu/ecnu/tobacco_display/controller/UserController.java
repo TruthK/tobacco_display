@@ -1,6 +1,8 @@
 package edu.ecnu.tobacco_display.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import edu.ecnu.tobacco_display.model.entity.LoginUser;
 import edu.ecnu.tobacco_display.model.entity.User;
 import edu.ecnu.tobacco_display.model.request.LoginRequest;
 import edu.ecnu.tobacco_display.service.UserService;
@@ -12,9 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/LoginPage")
+@RequestMapping("/user")
 public class UserController {
-
 
     @Autowired
     private UserService userService;
@@ -25,12 +26,10 @@ public class UserController {
      * @param userInfo
      * @return
      */
-    @PostMapping("Register")
+    @PostMapping("register")
     public JsonData register(@RequestBody Map<String, String> userInfo) {
         int rows = userService.save(userInfo);
-
         return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("注册失败，请重试");
-
     }
 
 
@@ -40,13 +39,18 @@ public class UserController {
      * @param loginRequest
      * @return
      */
-    @PostMapping("Login")
+    @PostMapping("login")
     public JsonData login(@RequestBody LoginRequest loginRequest) {
         System.out.println(loginRequest.getUserId() + "   " + loginRequest.getPassword());
-        String token = userService.findByUserIdAndPassword(loginRequest.getUserId(), loginRequest.getPassword());
+        LoginUser loginUser = userService.findByUserIdAndPassword(loginRequest.getUserId(), loginRequest.getPassword());
+        return loginUser == null ? JsonData.buildError("登录失败，账号密码错误") : JsonData.buildSuccess(JSON.toJSONString(loginUser));
+    }
 
-        return token == null ? JsonData.buildError("登录失败，账号密码错误") : JsonData.buildSuccess(token);
-
+    @PostMapping("alterUserInfo")
+    public JsonData alterUserInfo(@RequestBody Map<String, String> userInfo) {
+        System.out.println(".........");
+        int rows = userService.alterUserInfo(userInfo);
+        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("修改信息失败，请重试");
     }
 
 
@@ -56,18 +60,15 @@ public class UserController {
      * @param request
      * @return
      */
-    @GetMapping("find_by_token")
+    @GetMapping("findByToken")
     public JsonData findUserInfoByToken(HttpServletRequest request) {
 
         String userId = (String) request.getAttribute("user_id");
         if (userId == null) {
             return JsonData.buildError("查询失败");
         }
-
         User user = userService.findByUserId(userId);
-
         return JsonData.buildSuccess(user);
-
     }
 
 }

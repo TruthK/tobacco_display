@@ -12,6 +12,17 @@
 
     </insert>
 
+    <update id="alterUserInfo" parameterType="User">
+        update user
+        set
+        <trim prefix="" suffixOverrides=",">
+            <if test="nname != null ">nname = #{nname,jdbcType=VARCHAR} ,</if>
+            <if test="phone != null ">phone=#{phone,jdbcType=VARCHAR} ,</if>
+            <if test="password != null ">password=#{password,jdbcType=VARCHAR} ,</if>
+        </trim>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
 
     <!--根据用户id查询用户信息-->
     <select id="findByUserId" resultType="User">
@@ -28,7 +39,7 @@
 
         select *
         from user
-        where (user_id = #{user_id} )
+        where (user_id = #{user_id})
           and password = #{password}
 
 

@@ -52,10 +52,10 @@ public class DetailDetailRoastedTobaccoServiceImpl implements DetailRoastedTobac
         option.setDryBallTemp(queryOptionMap.get("dry_ball_Temp") != null ? Double.valueOf(queryOptionMap.get("dry_ball_Temp")) : -999);
         option.setWetBallTemp(queryOptionMap.get("wet_ball_Temp") != null ? Double.valueOf(queryOptionMap.get("wet_ball_Temp")) : -999);
         option.setDryBallTarget(queryOptionMap.get("dry_ball_target") != null ? Double.valueOf(queryOptionMap.get("dry_ball_target")) : -999);
-        option.setWetBallTarget(queryOptionMap.get("wet_ball_target") != null ? Double.valueOf(queryOptionMap.get("wet_ball_target")) :-999);
+        option.setWetBallTarget(queryOptionMap.get("wet_ball_target") != null ? Double.valueOf(queryOptionMap.get("wet_ball_target")) : -999);
 
         option.setLocation(queryOptionMap.get("location") != null ? queryOptionMap.get("location") : null);
-        option.setEquipmentNo(queryOptionMap.get("equipment_No") != null ? queryOptionMap.get("location") : null);
+        option.setEquipmentNo(queryOptionMap.get("equipment_No") != null ? queryOptionMap.get("equipment_No") : null);
         return option;
 
     }

@@ -1,0 +1,550 @@
+{
+  "location": "6500001",
+  "name": "云南省",
+  "children": [
+    {
+      "location": "650000",
+      "name": "昆明市",
+      "children": [
+        {
+          "location": "650200",
+          "name": "官渡区"
+        },
+        {
+          "location": "650100",
+          "name": "西山区"
+        },
+        {
+          "location": "654100",
+          "name": "东川区"
+        },
+        {
+          "location": "650501",
+          "name": "呈贡区"
+        },
+        {
+          "location": "650600",
+          "name": "晋宁区"
+        },
+        {
+          "location": "650400",
+          "name": "富民县"
+        },
+        {
+          "location": "652100",
+          "name": "宜良县"
+        },
+        {
+          "location": "652200",
+          "name": "石林彝族自治县"
+        },
+        {
+          "location": "651700",
+          "name": "嵩明县"
+        },
+        {
+          "location": "651500",
+          "name": "禄劝彝族苗族自治县"
+        },
+        {
+          "location": "655200",
+          "name": "寻甸回族彝族自治县"
+        },
+        {
+          "location": "650300",
+          "name": "安宁市"
+        }
+      ]
+    },
+    {
+      "location": "655000",
+      "name": "曲靖市",
+      "children": [
+        {
+          "location": "655100",
+          "name": "马龙区"
+        },
+        {
+          "location": "655600",
+          "name": "陆良县"
+        },
+        {
+          "location": "655700",
+          "name": "师宗县"
+        },
+        {
+          "location": "655800",
+          "name": "罗平县"
+        },
+        {
+          "location": "654200",
+          "name": "会泽县"
+        },
+        {
+          "location": "655400",
+          "name": "宣威市"
+        }
+      ]
+    },
+    {
+      "location": "653100",
+      "name": "玉溪市",
+      "children": [
+        {
+          "location": "652600",
+          "name": "江川区"
+        },
+        {
+          "location": "652500",
+          "name": "澄江县"
+        },
+        {
+          "location": "652700",
+          "name": "通海县"
+        },
+        {
+          "location": "652800",
+          "name": "华宁县"
+        },
+        {
+          "location": "651100",
+          "name": "易门县"
+        },
+        {
+          "location": "653200",
+          "name": "峨山彝族自治县"
+        },
+        {
+          "location": "653400",
+          "name": "新平彝族傣族自治县"
+        },
+        {
+          "location": "653300",
+          "name": "元江哈尼族彝族傣族自治县"
+        }
+      ]
+    },
+    {
+      "location": "678000",
+      "name": "保山市",
+      "children": [
+        {
+          "location": "678200",
+          "name": "施甸县"
+        },
+        {
+          "location": "678300",
+          "name": "龙陵县"
+        },
+        {
+          "location": "678100",
+          "name": "昌宁县"
+        },
+        {
+          "location": "679100",
+          "name": "腾冲市"
+        }
+      ]
+    },
+    {
+      "location": "657000",
+      "name": "昭通市",
+      "children": [
+        {
+          "location": "657100",
+          "name": "鲁甸县"
+        },
+        {
+          "location": "654600",
+          "name": "巧家县"
+        },
+        {
+          "location": "657500",
+          "name": "盐津县"
+        },
+        {
+          "location": "657400",
+          "name": "大关县"
+        },
+        {
+          "location": "657300",
+          "name": "永善县"
+        },
+        {
+          "location": "657700",
+          "name": "绥江县"
+        },
+        {
+          "location": "657200",
+          "name": "镇雄县"
+        },
+        {
+          "location": "657600",
+          "name": "彝良县"
+        },
+        {
+          "location": "657900",
+          "name": "威信县"
+        },
+        {
+          "location": "657800",
+          "name": "水富市"
+        }
+      ]
+    },
+    {
+      "location": "674100",
+      "name": "丽江市",
+      "children": [
+        {
+          "location": "674200",
+          "name": "永胜县"
+        },
+        {
+          "location": "674800",
+          "name": "华坪县"
+        },
+        {
+          "location": "674300",
+          "name": "宁蒗彝族自治县"
+        }
+      ]
+    },
+    {
+      "location": "665000",
+      "name": "普洱市",
+      "children": [
+        {
+          "location": "665100",
+          "name": "宁洱哈尼族彝族自治县"
+        },
+        {
+          "location": "654800",
+          "name": "墨江哈尼族自治县"
+        },
+        {
+          "location": "676200",
+          "name": "景东彝族自治县"
+        },
+        {
+          "location": "666400",
+          "name": "景谷傣族彝族自治县"
+        },
+        {
+          "location": "666500",
+          "name": "镇沅彝族哈尼族拉祜族自治县"
+        },
+        {
+          "location": "665900",
+          "name": "江城哈尼族彝族自治县"
+        },
+        {
+          "location": "665600",
+          "name": "澜沧拉祜族自治县"
+        },
+        {
+          "location": "665700",
+          "name": "西盟佤族自治县"
+        }
+      ]
+    },
+    {
+      "location": "677000",
+      "name": "临沧市",
+      "children": [
+        {
+          "location": "675900",
+          "name": "凤庆县"
+        },
+        {
+          "location": "675800",
+          "name": "云县"
+        },
+        {
+          "location": "677600",
+          "name": "永德县"
+        },
+        {
+          "location": "677700",
+          "name": "镇康县"
+        },
+        {
+          "location": "677300",
+          "name": "双江拉祜族佤族布朗族傣族自治县"
+        },
+        {
+          "location": "677500",
+          "name": "耿马傣族佤族自治县"
+        },
+        {
+          "location": "677400",
+          "name": "沧源佤族自治县"
+        }
+      ]
+    },
+    {
+      "location": "675000",
+      "name": "楚雄彝族自治州",
+      "children": [
+        {
+          "location": "675100",
+          "name": "双柏县"
+        },
+        {
+          "location": "675500",
+          "name": "牟定县"
+        },
+        {
+          "location": "675200",
+          "name": "南华县"
+        },
+        {
+          "location": "675300",
+          "name": "姚安县"
+        },
+        {
+          "location": "675400",
+          "name": "大姚县"
+        },
+        {
+          "location": "651400",
+          "name": "永仁县"
+        },
+        {
+          "location": "651300",
+          "name": "元谋县"
+        },
+        {
+          "location": "651600",
+          "name": "武定县"
+        },
+        {
+          "location": "651200",
+          "name": "禄丰县"
+        }
+      ]
+    },
+    {
+      "location": "661400",
+      "name": "红河哈尼族彝族自治州",
+      "children": [
+        {
+          "location": "661000",
+          "name": "个旧市"
+        },
+        {
+          "location": "661600",
+          "name": "开远市"
+        },
+        {
+          "location": "661100",
+          "name": "蒙自市"
+        },
+        {
+          "location": "652300",
+          "name": "弥勒市"
+        },
+        {
+          "location": "661200",
+          "name": "屏边苗族自治县"
+        },
+        {
+          "location": "654300",
+          "name": "建水县"
+        },
+        {
+          "location": "662200",
+          "name": "石屏县"
+        },
+        {
+          "location": "652400",
+          "name": "泸西县"
+        },
+        {
+          "location": "662400",
+          "name": "元阳县"
+        },
+        {
+          "location": "654400",
+          "name": "红河县"
+        },
+        {
+          "location": "661500",
+          "name": "金平苗族瑶族傣族自治县"
+        },
+        {
+          "location": "662500",
+          "name": "绿春县"
+        },
+        {
+          "location": "661300",
+          "name": "河口瑶族自治县"
+        }
+      ]
+    },
+    {
+      "location": "663000",
+      "name": "文山壮族苗族自治州",
+      "children": [
+        {
+          "location": "663100",
+          "name": "砚山县"
+        },
+        {
+          "location": "663500",
+          "name": "西畴县"
+        },
+        {
+          "location": "663600",
+          "name": "麻栗坡县"
+        },
+        {
+          "location": "663700",
+          "name": "马关县"
+        },
+        {
+          "location": "663200",
+          "name": "丘北县"
+        },
+        {
+          "location": "663300",
+          "name": "广南县"
+        },
+        {
+          "location": "663400",
+          "name": "富宁县"
+        },
+        {
+          "location": "000116",
+          "name": "文山区"
+        }
+      ]
+    },
+    {
+      "location": "666100",
+      "name": "西双版纳傣族自治州",
+      "children": [
+        {
+          "location": "666200",
+          "name": "勐海县"
+        },
+        {
+          "location": "666300",
+          "name": "勐腊县"
+        }
+      ]
+    },
+    {
+      "location": "671000",
+      "name": "大理白族自治州",
+      "children": [
+        {
+          "location": "672500",
+          "name": "漾濞彝族自治县"
+        },
+        {
+          "location": "672100",
+          "name": "祥云县"
+        },
+        {
+          "location": "671600",
+          "name": "宾川县"
+        },
+        {
+          "location": "675600",
+          "name": "弥渡县"
+        },
+        {
+          "location": "675700",
+          "name": "南涧彝族自治县"
+        },
+        {
+          "location": "672400",
+          "name": "巍山彝族回族自治县"
+        },
+        {
+          "location": "672600",
+          "name": "永平县"
+        },
+        {
+          "location": "672700",
+          "name": "云龙县"
+        },
+        {
+          "location": "671200",
+          "name": "洱源县"
+        },
+        {
+          "location": "671300",
+          "name": "剑川县"
+        },
+        {
+          "location": "671500",
+          "name": "鹤庆县"
+        }
+      ]
+    },
+    {
+      "location": "678400",
+      "name": "德宏傣族景颇族自治州",
+      "children": [
+        {
+          "location": "678600",
+          "name": "瑞丽市"
+        },
+        {
+          "location": "678499",
+          "name": "芒市"
+        },
+        {
+          "location": "679200",
+          "name": "梁河县"
+        },
+        {
+          "location": "679300",
+          "name": "盈江县"
+        },
+        {
+          "location": "678700",
+          "name": "陇川县"
+        }
+      ]
+    },
+    {
+      "location": "673100",
+      "name": "怒江傈僳族自治州",
+      "children": [
+        {
+          "location": "673200",
+          "name": "泸水市"
+        },
+        {
+          "location": "673400",
+          "name": "福贡县"
+        },
+        {
+          "location": "673500",
+          "name": "贡山独龙族怒族自治县"
+        },
+        {
+          "location": "671400",
+          "name": "兰坪白族普米族自治县"
+        }
+      ]
+    },
+    {
+      "location": "674400",
+      "name": "迪庆藏族自治州",
+      "children": [
+        {
+          "location": "674500",
+          "name": "德钦县"
+        },
+        {
+          "location": "674600",
+          "name": "维西傈僳族自治县"
+        }
+      ]
+    }
+  ]
+}

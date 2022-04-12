@@ -41,7 +41,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 //                return false;
 //            }
 
-
             String accessToken = request.getHeader("token");
             System.out.println(request.getHeader("token"));
             if (accessToken == null) {

@@ -38,10 +38,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
          */
         registry.addInterceptor(corsInterceptor()).addPathPatterns("/**");
 
-
         registry.addInterceptor(loginInterceptor()).addPathPatterns("/*/*/**")
                 //不拦截哪些路径   斜杠一定要加
-                .excludePathPatterns("/LoginPage/Login", "/LoginPage/Register");
+                .excludePathPatterns("/user/login", "/user/register");
 
 
         WebMvcConfigurer.super.addInterceptors(registry);

@@ -13,7 +13,7 @@ import java.util.Map;
  * @author TruthK
  */
 @RestController
-@RequestMapping("/api/query")
+@RequestMapping("/query")
 public class DetailRoastedTobaccoController {
 
 
@@ -29,10 +29,7 @@ public class DetailRoastedTobaccoController {
      */
     @PostMapping("detailRoastedTobacco")
     public JsonData findDetailByOptions(@RequestBody Map<String, String> queryOptions) {
-
-
         List<DetailRoastedTobacco> detailRoastedTobaccoList = detailRoastedTobaccoService.findDetailByOptions(queryOptions);
-
         return JsonData.buildSuccess(detailRoastedTobaccoList);
 
     }

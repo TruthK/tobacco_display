@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 小滴课堂 视频对象
+ *
  * <p>
- * CREATE TABLE IF NOT EXISTS `bakehouse_sensors`(
+ * CREATE TABLE IF NOT EXISTS `bakehouse_sensors_records`(
  * `produce_date` DATETIME NOT NULL COMMENT '传感器数据产生的时间',
  * `dry_ball_Temp` FLOAT NOT NULL COMMENT '干球温度',
  * `wet_ball_Temp` FLOAT NOT NULL COMMENT '湿球温度',
