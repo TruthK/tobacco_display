@@ -48,7 +48,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
 
             if (StringUtils.isNotBlank(accessToken)) {
-                Claims claims = JWTUtils.checkJWT(accessToken);
+                Claims claims = JWTUtils.findJWT(accessToken);
                 if (claims == null) {
                     //告诉登录过期，重新登录
                     sendJsonMessage(response, JsonData.buildError("登录过期，重新登录"));

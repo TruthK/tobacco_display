@@ -4,10 +4,16 @@
 
 
     <insert id="save" parameterType="User">
-
-        INSERT INTO user (user_id, phone, password, nname, category, head_img, create_time)
-        values (#{userId,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-                #{nname,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR},
+        INSERT INTO user (user_id, phone, password,
+                          nname, category, head_img,
+                          permission_range, create_time)
+        values (#{userId,jdbcType=VARCHAR},
+                #{phone,jdbcType=VARCHAR},
+                #{password,jdbcType=VARCHAR},
+                #{nname,jdbcType=VARCHAR},
+                #{category,jdbcType=VARCHAR},
+                #{headImg,jdbcType=VARCHAR},
+                #{permissionRange,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP})
 
     </insert>
@@ -19,30 +25,26 @@
             <if test="nname != null ">nname = #{nname,jdbcType=VARCHAR} ,</if>
             <if test="phone != null ">phone=#{phone,jdbcType=VARCHAR} ,</if>
             <if test="password != null ">password=#{password,jdbcType=VARCHAR} ,</if>
+            <if test="permissionRange != null ">permission_range=#{permissionRange,jdbcType=VARCHAR} ,</if>
         </trim>
         where user_id = #{userId,jdbcType=VARCHAR}
     </update>
 
 
-    <!--根据用户id查询用户信息-->
-    <select id="findByUserId" resultType="User">
-
+    <!--根据用户id or 手机 来查询用户信息-->
+    <select id="findByUserIdOrPhone" resultType="User">
         select *
         from user
-        where user_id = #{userId}
-
+        where user_id = #{queryInfo} or phone = #{queryInfo}
     </select>
 
 
     <!--根据（用户号或者手机号）和密码找用户-->
     <select id="findByUserIdAndPassword" resultType="User">
-
         select *
         from user
         where (user_id = #{user_id})
           and password = #{password}
-
-
     </select>
 
 

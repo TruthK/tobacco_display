@@ -24,7 +24,7 @@ class TobaccoDisplayApplicationTests {
     public void test() throws UnsupportedEncodingException {
         String jsonString = ReadFromFile.readFileByLines("D:\\code\\tobacco_display\\src\\main\\resources\\city.json");
 
-        jsonString = jsonString.replaceAll("^[　*| *| *|//s*]*", "").replaceAll("[　*| *| *|//s*]*$", "");
+//        jsonString = jsonString.replaceAll("^[　*| *| *|//s*]*", "").replaceAll("[　*| *| *|//s*]*$", "");
         byte[] utf8Bytes = jsonString.getBytes("UTF-8");
         jsonString = new String(utf8Bytes, "UTF-8");
         //        System.out.println(jsonString);
@@ -34,13 +34,13 @@ class TobaccoDisplayApplicationTests {
 //        System.out.println(object);
         byte[] serialize = SerializeUtil.serialize(object);
 
-        redisTemplate.opsForValue().set("city_map", serialize);
+        redisTemplate.opsForValue().set("city_map", JSON.toJSONString(object));
 
-        byte[] bytes = (byte[]) redisTemplate.opsForValue().get("city_map");
-        CityMap obj = (CityMap) SerializeUtil.unserialize(bytes);
+        String bytes = (String) redisTemplate.opsForValue().get("city_map");
+//        CityMap obj = (CityMap) SerializeUtil.unserialize(bytes);
 
 //        redisTemplate.opsForValue().set("test_1","1111");
-        System.out.println(obj.toString());
+        System.out.println(JSON.parseObject(bytes, CityMap.class).toString());
     }
 
 }

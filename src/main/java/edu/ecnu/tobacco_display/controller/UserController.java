@@ -29,7 +29,7 @@ public class UserController {
     @PostMapping("register")
     public JsonData register(@RequestBody Map<String, String> userInfo) {
         int rows = userService.save(userInfo);
-        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("注册失败，请重试");
+        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("注册失败，请确认输入无误");
     }
 
 
@@ -41,33 +41,29 @@ public class UserController {
      */
     @PostMapping("login")
     public JsonData login(@RequestBody LoginRequest loginRequest) {
-        System.out.println(loginRequest.getUserId() + "   " + loginRequest.getPassword());
         LoginUser loginUser = userService.findByUserIdAndPassword(loginRequest.getUserId(), loginRequest.getPassword());
-        return loginUser == null ? JsonData.buildError("登录失败，账号密码错误") : JsonData.buildSuccess(JSON.toJSONString(loginUser));
+        return loginUser == null ? JsonData.buildError("登录失败，账号密码错误") : JsonData.buildSuccess(loginUser);
     }
 
     @PostMapping("alterUserInfo")
     public JsonData alterUserInfo(@RequestBody Map<String, String> userInfo) {
-        System.out.println(".........");
         int rows = userService.alterUserInfo(userInfo);
-        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("修改信息失败，请重试");
+        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("修改信息失败，请确认输入无误");
     }
 
 
     /**
      * 根据用户id查询用户信息
      *
-     * @param request
+     * @param queryInfo
      * @return
      */
-    @GetMapping("findByToken")
-    public JsonData findUserInfoByToken(HttpServletRequest request) {
-
-        String userId = (String) request.getAttribute("user_id");
-        if (userId == null) {
-            return JsonData.buildError("查询失败");
+    @GetMapping("findByUserIdOrPhone")
+    public JsonData findByUserIdOrPhone(@RequestParam("query_info") String queryInfo) {
+        if (queryInfo == null) {
+            return JsonData.buildError("请确认输入无误");
         }
-        User user = userService.findByUserId(userId);
+        User user = userService.findByUserIdOrPhone(queryInfo);
         return JsonData.buildSuccess(user);
     }
 

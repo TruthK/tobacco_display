@@ -26,16 +26,18 @@ public class LoginUser {
     @JsonProperty("category")
     private String category;
 
+    @JsonProperty("permission_range")
+    private String permissionRange;
+
     public LoginUser() {
     }
 
-    public LoginUser(String nname, String token, String headImg, String userId, String phone, String category) {
-        this.nname = nname;
-        this.token = token;
-        this.headImg = headImg;
-        this.userId = userId;
-        this.phone = phone;
-        this.category = category;
+    public String getPermissionRange() {
+        return permissionRange;
+    }
+
+    public void setPermissionRange(String permissionRange) {
+        this.permissionRange = permissionRange;
     }
 
     public String getNname() {

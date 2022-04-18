@@ -30,15 +30,14 @@ public class HomePageController {
     public JsonData queryDistribution(@RequestBody Map<String, Date> timeRange) {
         Date startTime = timeRange.get("startTime");
         Date endTime = timeRange.get("endTime");
-        byte[] bytes = (byte[]) redisTemplate.opsForValue().get("city_map");
-
+        String cityMapJson = (String) redisTemplate.opsForValue().get("city_map");
+        CityMap cityMap = JSON.parseObject(cityMapJson, CityMap.class);
 //        if (bytes.length <= 2) {
 //            CityMap cityMap = null;
 //            byte[] serialize = SerializeUtil.serialize(cityMap);
 //            redisTemplate.opsForValue().set("test_9", serialize);
 //        }
-        CityMap citymap = (CityMap) SerializeUtil.unserialize(bytes);
-        return citymap.getChildren().size() >= 3 ? JsonData.buildSuccess(JSON.toJSONString(citymap)) : JsonData.buildError("查询失败，请重试");
+        return cityMap.getChildren().size() >= 3 ? JsonData.buildSuccess(cityMap) : JsonData.buildError("查询失败，请确认输入无误");
     }
 
     /**
@@ -48,6 +47,6 @@ public class HomePageController {
     public JsonData queryRunEquipment(@RequestBody Map<String, String> runEquipmentInfo) {
 
 
-        return 1 == 1 ? JsonData.buildSuccess() : JsonData.buildError("查询失败，请重试");
+        return 1 == 1 ? JsonData.buildSuccess() : JsonData.buildError("查询失败，请确认输入无误");
     }
 }

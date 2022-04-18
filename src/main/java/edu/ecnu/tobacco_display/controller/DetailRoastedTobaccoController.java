@@ -15,22 +15,18 @@ import java.util.Map;
 @RestController
 @RequestMapping("/query")
 public class DetailRoastedTobaccoController {
-
-
     @Autowired
     private DetailRoastedTobaccoService detailRoastedTobaccoService;
 
-
     /**
      * 查询烤烟数据
-     *
      * @param
      * @return
      */
     @PostMapping("detailRoastedTobacco")
     public JsonData findDetailByOptions(@RequestBody Map<String, String> queryOptions) {
         List<DetailRoastedTobacco> detailRoastedTobaccoList = detailRoastedTobaccoService.findDetailByOptions(queryOptions);
-        return JsonData.buildSuccess(detailRoastedTobaccoList);
+        return detailRoastedTobaccoList != null ? JsonData.buildSuccess(detailRoastedTobaccoList) : JsonData.buildError("请确认输入无误");
 
     }
 

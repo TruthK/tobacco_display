@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.BakingMapper">
+
+    <!--根据多个条件找烘烤-->
+    <select id="findBakingRecordsByOptions" resultType="BakingRecord">
+        SELECT b.id,start_time,
+        end_time,location,
+        parent_location,station_id,b.device_id as device_id,
+        baking_weight_before,
+        baking_weight_after,
+        farmer_id,technician_id,phone,nname,
+        score from (select br.id,start_time,
+        end_time,location,
+        parent_location,station_id,br.device_id as device_id,
+        baking_weight_before,
+        baking_weight_after,
+        farmer_id,technician_id,
+        score
+        from baking_records br left join
+        (select id, location,parent_location,station_id,device_id from bakehouse_info) bi on br.device_id=bi.device_id) b
+        LEFT JOIN (select user_id,phone,nname from user) u on
+        <if test="technicianId == null ">
+            b.farmer_id= u.user_id
+        </if>
+        <if test="technicianId != null ">
+            b.technician_id= u.user_id
+        </if>
+
+        <trim prefix="where" suffixOverrides="and">
+            <if test="findStartTime != null ">start_time &gt; #{findStartTime,jdbcType=TIMESTAMP} and</if>
+            <if test="findEndTime != null ">start_time &lt; #{findEndTime,jdbcType=TIMESTAMP} and</if>
+
+            <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
+            <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
+            <if test="stationId != null ">station_id = #{stationId,jdbcType=VARCHAR} and</if>
+
+            <if test="deviceId != null ">device_id=#{deviceId,jdbcType=VARCHAR} and</if>
+            <if test="farmerId != null ">
+                (farmer_id=#{farmerId,jdbcType=VARCHAR}
+                or phone=#{farmerId,jdbcType=VARCHAR}) and
+            </if>
+            <if test="technicianId != null ">
+                (technician_id=#{technicianId,jdbcType=VARCHAR}
+                or phone=#{technicianId,jdbcType=VARCHAR} ) and
+            </if>
+            <if test="scoreLowerBound >0 ">score &gt;= #{scoreLowerBound,jdbcType=DOUBLE} and</if>
+            <if test="scoreUpperBound >0 ">score &lt;= #{scoreUpperBound,jdbcType=DOUBLE} and</if>
+        </trim>
+    </select>
+
+    <update id="alterBakingRecord" parameterType="BakingRecord">
+        update baking_records
+        set
+        <trim prefix="" suffixOverrides=",">
+
+            <if test="startTime != null ">
+                start_time=#{startTime,jdbcType=TIMESTAMP} ,
+            </if>
+            <if test="endTime != null ">
+                end_time=#{endTime,jdbcType=TIMESTAMP} ,
+            </if>
+
+            <if test="farmerId != null ">
+                farmer_id = #{farmerId} ,
+            </if>
+            <if test="technicianId != null ">
+                technician_id=#{technicianId,jdbcType=VARCHAR} ,
+            </if>
+            <if test="deviceId != null ">
+                device_id=#{deviceId,jdbcType=VARCHAR} ,
+            </if>
+
+            <if test="bakingWeightBefore >0 ">
+                baking_weight_before=#{bakingWeightBefore,jdbcType=DOUBLE} ,
+            </if>
+            <if test="bakingWeightAfter >0 ">
+                baking_weight_after=#{bakingWeightAfter,jdbcType=DOUBLE} ,
+            </if>
+            <if test="score >0 ">
+                score=#{score,jdbcType=DOUBLE} ,
+            </if>
+            <if test="tobaccoInfo != null ">
+                tobacco_info=#{tobaccoInfo,jdbcType=VARCHAR} ,
+            </if>
+
+        </trim>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="saveBakingRecord" parameterType="BakingRecord">
+
+        INSERT INTO baking_records (device_id, start_time,
+                                    end_time, baking_weight_before,
+                                    baking_weight_after,
+                                    tobacco_info, farmer_id,
+                                    technician_id,
+                                    score)
+        values (#{deviceId,jdbcType=VARCHAR},
+                #{startTime,jdbcType=TIMESTAMP},
+            #{endTime,jdbcType=TIMESTAMP},
+             #{bakingWeightBefore,jdbcType=DOUBLE},
+            #{bakingWeightAfter,jdbcType=DOUBLE},
+            #{tobaccoInfo,jdbcType=VARCHAR},
+            #{farmerId,jdbcType=VARCHAR},
+            #{technicianId,jdbcType=VARCHAR},
+            #{score,jdbcType=DOUBLE})
+
+    </insert>
+
+    <delete id="deleteBakingRecord" parameterType="BakingRecord">
+        DELETE
+        FROM baking_records
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

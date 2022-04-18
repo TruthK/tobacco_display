@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.DeviceMapper">
+
+    <!--根据多个条件找烤房-->
+    <select id="findDeviceByOptions" resultType="Device">
+        select bi.device_id,bi.address,bi.parent_location,
+        bi.location,bi.head,bi.head_phone,bi.kind,
+        bi.create_time,bi.device_name,s.station_id,
+        s.station_name
+        from bakehouse_info bi left join stations s
+        on bi.station_id=s.station_id
+        <trim prefix="where" suffixOverrides="and">
+            <if test="head != null ">bi.head = #{head,jdbcType=VARCHAR} and</if>
+            <if test="deviceId != null ">bi.device_id=#{deviceId,jdbcType=VARCHAR} and</if>
+            <if test="deviceName != null ">bi.device_name=#{deviceName,jdbcType=VARCHAR} and</if>
+            <if test="headPhone != null ">bi.head_phone=#{headPhone,jdbcType=VARCHAR} and</if>
+            <if test="kind >0 ">bi.kind=#{kind,jdbcType=INTEGER} and</if>
+            <if test="location != null ">bi.location=#{location,jdbcType=VARCHAR} and</if>
+            <if test="parentLocation != null ">bi.parent_location=#{parentLocation,jdbcType=VARCHAR} and</if>
+            <if test="stationId != null ">bi.station_id=#{stationId,jdbcType=VARCHAR} and</if>
+        </trim>
+    </select>
+
+    <update id="alterDeviceInfo" parameterType="Device">
+        update bakehouse_info
+        set
+        <trim prefix="" suffixOverrides=",">
+            <if test="head != null ">
+                head = #{head,jdbcType=VARCHAR} ,
+            </if>
+            <if test="headPhone != null ">
+                head_phone=#{headPhone,jdbcType=VARCHAR} ,
+            </if>
+            <if test="address != null ">
+                address=#{address,jdbcType=VARCHAR} ,
+            </if>
+            <if test="stationId != null ">
+                station_id=#{stationId,jdbcType=VARCHAR} ,
+            </if>
+
+        </trim>
+        where device_id = #{deviceId,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="saveDeviceInfo" parameterType="Device">
+
+        INSERT INTO bakehouse_info (device_id, device_name,
+                                    head, head_phone, location,
+                                    parent_location, address, kind,
+                                    create_time, station_id)
+        values (#{deviceId,jdbcType=VARCHAR},
+                #{deviceName,jdbcType=VARCHAR},
+                #{head,jdbcType=VARCHAR},
+                #{headPhone,jdbcType=VARCHAR},
+                #{location,jdbcType=VARCHAR},
+                #{parentLocation,jdbcType=VARCHAR},
+                #{address,jdbcType=VARCHAR},
+                #{kind,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP}),
+            #{stationId,jdbcType=VARCHAR})
+
+    </insert>
+
+    <delete id="deleteDevice" parameterType="Device">
+        DELETE
+        FROM bakehouse_info
+        WHERE device_id = #{deviceId,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.BakingMapper">
+
+    <select id="findWarningsByOptions" resultType="BakingWarning">
+        select sum(warning_1) as warning_1,
+        sum(warning_2) as warning_2,
+        sum(warning_3) as warning_3,
+        sum(warning_4) as warning_4,
+        sum(warning_5) as warning_5,
+        sum(warning_6) as warning_6,
+        sum(warning_7) as warning_7
+        <if test="deviceId != null and
+            parentLocation == null and
+            location == null">,bw.device_id
+        </if>
+        <if test="deviceId == null and
+            (parentLocation != null or
+            location != null)">,location
+        </if>
+        <if test="deviceId == null and location == null and
+            parentLocation == null ">,parent_location
+        </if>
+        from
+        baking_warning bw LEFT JOIN bakehouse_info bi
+        on bw.device_id=bi.device_id
+        <trim prefix="where" suffixOverrides="and">
+            <if test="startTime != null ">warning_time &gt; #{startTime,jdbcType=TIMESTAMP} and</if>
+            <if test="endTime != null ">warning_time &lt; #{endTime,jdbcType=TIMESTAMP} and</if>
+            <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
+            <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
+            <if test="deviceId != null ">bw.device_id = #{deviceId,jdbcType=VARCHAR} and</if>
+        </trim>
+        <trim prefix="group by" suffixOverrides=",">
+
+            <if test="deviceId != null and
+            parentLocation == null and
+            location == null">bw.device_id
+            </if>
+            <if test="deviceId == null and
+            (parentLocation != null or
+            location != null)">location
+            </if>
+            <if test="deviceId == null and location == null and
+            parentLocation == null ">parent_location
+            </if>
+
+        </trim>
+        limit 1000
+    </select>
+
+
+</mapper>

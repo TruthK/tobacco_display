@@ -12,8 +12,8 @@ public class QueryOptionsRequest {
     private Date startTime;
     @JsonProperty("end_time")
     private Date endTime;
-    @JsonProperty("equipment_No")
-    private String equipmentNo;
+    @JsonProperty("device_id")
+    private String deviceId;
     private String location;
 
     @JsonProperty("dry_ball_Temp")
@@ -30,7 +30,7 @@ public class QueryOptionsRequest {
         return "QueryOptionsRequest{" +
                 "startTime=" + startTime +
                 ", endTime=" + endTime +
-                ", equipmentNo='" + equipmentNo + '\'' +
+                ", deviceId='" + deviceId + '\'' +
                 ", location='" + location + '\'' +
                 ", dryBallTemp=" + dryBallTemp +
                 ", wetBallTemp=" + wetBallTemp +
@@ -55,12 +55,12 @@ public class QueryOptionsRequest {
         this.endTime = endTime;
     }
 
-    public String getEquipmentNo() {
-        return equipmentNo;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setEquipmentNo(String equipmentNo) {
-        this.equipmentNo = equipmentNo;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
     public String getLocation() {

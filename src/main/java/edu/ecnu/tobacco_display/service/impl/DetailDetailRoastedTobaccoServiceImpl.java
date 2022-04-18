@@ -26,10 +26,8 @@ public class DetailDetailRoastedTobaccoServiceImpl implements DetailRoastedTobac
     @Override
     public List<DetailRoastedTobacco> findDetailByOptions(Map<String, String> queryOptionMap) {
         QueryOptionsRequest queryOptionsRequest = parseToQueryOption(queryOptionMap);
-        System.out.println(queryOptionsRequest);
         // 需要使用mybaits关联复杂查询
         List<DetailRoastedTobacco> detailRoastedTobaccoList = detailRoastedTobaccoMapper.findDetailByOptions(queryOptionsRequest);
-
         return detailRoastedTobaccoList;
     }
 
@@ -55,7 +53,7 @@ public class DetailDetailRoastedTobaccoServiceImpl implements DetailRoastedTobac
         option.setWetBallTarget(queryOptionMap.get("wet_ball_target") != null ? Double.valueOf(queryOptionMap.get("wet_ball_target")) : -999);
 
         option.setLocation(queryOptionMap.get("location") != null ? queryOptionMap.get("location") : null);
-        option.setEquipmentNo(queryOptionMap.get("equipment_No") != null ? queryOptionMap.get("equipment_No") : null);
+        option.setDeviceId(queryOptionMap.get("device_id") != null ? queryOptionMap.get("device_id") : null);
         return option;
 
     }

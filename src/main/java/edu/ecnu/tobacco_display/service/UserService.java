@@ -32,7 +32,7 @@ public interface UserService {
      */
     LoginUser findByUserIdAndPassword(String userId, String password);
 
-    User findByUserId(String userId);
 
-    User findByPhone(String phone);
+    User findByUserIdOrPhone(String queryInfo);
+
 }

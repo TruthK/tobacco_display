@@ -11,7 +11,7 @@
 
             <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
 
-            <if test="equipmentNo != null ">equipment_No = #{equipmentNo,jdbcType=VARCHAR} and</if>
+            <if test="deviceId != null ">device_id = #{deviceId,jdbcType=VARCHAR} and</if>
 
             <if test="dryBallTemp != -999 ">dry_ball_Temp &lt; #{dryBallTemp,jdbcType=DOUBLE} and</if>
             <if test="wetBallTemp != -999 ">wet_ball_Temp &lt; #{wetBallTemp,jdbcType=DOUBLE} and</if>

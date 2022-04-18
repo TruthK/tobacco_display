@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.StationMapper">
+
+    <!--根据多个条件找烤房-->
+    <select id="findStationByOptions" resultType="Station">
+        select station_id,address,parent_location,location,station_name
+        from stations
+        <trim prefix="where" suffixOverrides="and">
+            <if test="stationId != null ">station_id=#{stationId,jdbcType=VARCHAR} and</if>
+            <if test="stationName != null ">station_name=#{stationName,jdbcType=VARCHAR} and</if>
+            <if test="location != null ">location=#{location,jdbcType=VARCHAR} and</if>
+            <if test="parentLocation != null ">parent_location=#{parentLocation,jdbcType=VARCHAR} and</if>
+        </trim>
+    </select>
+
+    <update id="alterStationInfo" parameterType="Station">
+        update stations
+        set
+        <trim prefix="" suffixOverrides=",">
+            <if test="address != null ">address=#{address,jdbcType=VARCHAR} ,</if>
+            <if test="stationName != null ">station_name=#{stationName,jdbcType=VARCHAR} ,</if>
+            <if test="location != null ">location=#{location,jdbcType=VARCHAR} ,</if>
+            <if test="parentLocation != null ">parent_location=#{parentLocation,jdbcType=VARCHAR} ,</if>
+        </trim>
+        where station_id = #{stationId,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="saveStationInfo" parameterType="Station">
+
+        INSERT INTO stations (station_id, station_name, location, parent_location, address)
+        values (#{stationId,jdbcType=VARCHAR}, #{stationName,jdbcType=VARCHAR},
+                #{location,jdbcType=VARCHAR}, #{parentLocation,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
+
+    </insert>
+
+    <delete id="deleteStation" parameterType="Station">
+        DELETE
+        FROM stations
+        WHERE station_id = #{stationId,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

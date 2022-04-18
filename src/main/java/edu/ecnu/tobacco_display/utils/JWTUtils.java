@@ -73,7 +73,7 @@ public class JWTUtils {
      * @param token
      * @return
      */
-    public static Claims checkJWT(String token) {
+    public static Claims findJWT(String token) {
 
         try {
 

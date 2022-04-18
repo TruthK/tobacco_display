@@ -38,7 +38,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public int alterUserInfo(Map<String, String> userInfo) {
         User user = parseToUser(userInfo);
-        System.out.println(user.toString());
         if (user != null) {
             return userMapper.alterUserInfo(user);
         } else {
@@ -56,7 +55,6 @@ public class UserServiceImpl implements UserService {
 
         } else {
             String token = JWTUtils.geneJsonWebToken(user);
-
             loginUser = new LoginUser();
             loginUser.setUserId(user.getUserId());
             loginUser.setHeadImg(user.getHeadImg());
@@ -64,21 +62,16 @@ public class UserServiceImpl implements UserService {
             loginUser.setToken(token);
             loginUser.setNname(user.getNname());
             loginUser.setPhone(user.getPhone());
-
+            loginUser.setPermissionRange(user.getPermissionRange());
             return loginUser;
         }
 
     }
 
-    @Override
-    public User findByUserId(String userId) {
-        User user = userMapper.findByUserId(userId);
-        return user;
-    }
 
     @Override
-    public User findByPhone(String phone) {
-        User user = userMapper.findByUserId(phone);
+    public User findByUserIdOrPhone(String phone) {
+        User user = userMapper.findByUserIdOrPhone(phone);
         return user;
     }
 
@@ -112,8 +105,9 @@ public class UserServiceImpl implements UserService {
             if (userInfo.containsKey("nname")) {
                 user.setNname(userInfo.get("nname"));
             }
-
-//            user.setHeadImg(getRandomImg());
+            if (userInfo.containsKey("permission_range")) {
+                user.setPermissionRange(userInfo.get("permission_range"));
+            }
             return user;
         } else {
             return null;
@@ -121,22 +115,5 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    /**
-     * 放在CDN上的随机头像
-     */
-    private static final String[] headImg = {
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/default/head_img/12.jpeg",
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/default/head_img/11.jpeg",
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/default/head_img/13.jpeg",
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/default/head_img/14.jpeg",
-            "https://xd-video-pc-img.oss-cn-beijing.aliyuncs.com/xdclass_pro/default/head_img/15.jpeg"
-    };
-
-    private String getRandomImg() {
-        int size = headImg.length;
-        Random random = new Random();
-        int index = random.nextInt(size);
-        return headImg[index];
-    }
 
 }

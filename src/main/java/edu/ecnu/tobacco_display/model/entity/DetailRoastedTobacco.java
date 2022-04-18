@@ -16,8 +16,8 @@ import java.util.List;
  * `dry_ball_target` FLOAT NOT NULL COMMENT '干球目标温度',
  * `wet_ball_target` FLOAT NOT NULL COMMENT '湿球目标温度',
  * `location`  VARCHAR(64) NOT NULL,
- * `equipment_No` VARCHAR(64) NOT NULL COMMENT '烤房编号',
- * index  info(location,equipment_No)
+ * `deviceId` VARCHAR(64) NOT NULL COMMENT '烤房编号',
+ * index  info(location,deviceId)
  * )ENGINE=InnoDB DEFAULT CHARSET=utf8;
  */
 public class DetailRoastedTobacco {
@@ -36,8 +36,8 @@ public class DetailRoastedTobacco {
 
     @JsonProperty("location")
     private String location;
-    @JsonProperty("equipment_No")
-    private String equipmentNo;
+    @JsonProperty("device_id")
+    private String deviceId;
 
 //    @JsonProperty("roasted_tobacco_list")
 //    private List<DetailRoastedTobacco> detailRoastedTobaccoList;
@@ -98,19 +98,12 @@ public class DetailRoastedTobacco {
         this.location = location;
     }
 
-    public String getEquipmentNo() {
-        return equipmentNo;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setEquipmentNo(String equipmentNo) {
-        this.equipmentNo = equipmentNo;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
-//    public List<DetailRoastedTobacco> getRoastedTobaccoList() {
-//        return detailRoastedTobaccoList;
-//    }
-//
-////    public void setRoastedTobaccoList(List<DetailRoastedTobacco> detailRoastedTobaccoList) {
-////        this.detailRoastedTobaccoList = detailRoastedTobaccoList;
-////    }
 }
