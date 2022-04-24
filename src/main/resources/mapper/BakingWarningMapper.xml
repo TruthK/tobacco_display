@@ -10,19 +10,37 @@
         sum(warning_5) as warning_5,
         sum(warning_6) as warning_6,
         sum(warning_7) as warning_7
-        <if test="deviceId != null and
-            parentLocation == null and
-            location == null">,bw.device_id
+        <if test="stationId != null or
+            deviceId != null ">
+               ,bw.device_id
         </if>
-        <if test="deviceId == null and
-            (parentLocation != null or
-            location != null)">,location
+        <if test="location != null ">
+            ,bi.station_id
         </if>
-        <if test="deviceId == null and location == null and
-            parentLocation == null ">,parent_location
+        <if test="parentLocation != null ">
+               ,location
+        </if>
+        <if test="deviceId == null and stationId == null and location == null and
+            parentLocation == null ">
+               ,parent_location
         </if>
         from
-        baking_warning bw LEFT JOIN bakehouse_info bi
+        baking_warning bw LEFT JOIN (SELECT
+        baking_weight_before,
+        baking_weight_after,
+        tobacco_info,
+        br.device_id,
+        DATE_FORMAT( end_time, '%Y-%m-%d' ) AS end_time,
+        score,location,parent_location,
+        bs.station_id
+        FROM
+        baking_records br
+        LEFT JOIN
+        ( SELECT location, parent_location,
+        device_id, bi.station_id
+        FROM bakehouse_info bi LEFT JOIN stations
+        s ON bi.station_id = s.station_id ) bs
+        ON br.device_id = bs.device_id) bi
         on bw.device_id=bi.device_id
         <trim prefix="where" suffixOverrides="and">
             <if test="startTime != null ">warning_time &gt; #{startTime,jdbcType=TIMESTAMP} and</if>
@@ -30,19 +48,21 @@
             <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
             <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
             <if test="deviceId != null ">bw.device_id = #{deviceId,jdbcType=VARCHAR} and</if>
+            <if test="stationId != null ">bi.station_id = #{stationId} and</if>
         </trim>
         <trim prefix="group by" suffixOverrides=",">
-
-            <if test="deviceId != null and
-            parentLocation == null and
-            location == null">bw.device_id
+            <if test="stationId != null">
+            bw.device_id
             </if>
-            <if test="deviceId == null and
-            (parentLocation != null or
-            location != null)">location
+            <if test="location != null">
+                bi.station_id
             </if>
-            <if test="deviceId == null and location == null and
-            parentLocation == null ">parent_location
+            <if test="parentLocation != null">
+            location
+            </if>
+            <if test="deviceId == null and stationId == null and location == null and
+            parentLocation == null ">
+            parent_location
             </if>
 
         </trim>

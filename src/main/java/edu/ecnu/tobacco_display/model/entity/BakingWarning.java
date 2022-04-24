@@ -9,8 +9,10 @@ import java.util.Date;
  */
 public class BakingWarning {
 
-    @JsonProperty("deviceId")
+    @JsonProperty("device_id")
     private String deviceId;
+    @JsonProperty("station_id")
+    private String stationId;
     @JsonProperty("location")
     private String location;
     @JsonProperty("parent_location")
@@ -76,6 +78,14 @@ public class BakingWarning {
                 ", warning6=" + warning6 +
                 ", warning7=" + warning7 +
                 '}';
+    }
+
+    public String getStationId() {
+        return stationId;
+    }
+
+    public void setStationId(String stationId) {
+        this.stationId = stationId;
     }
 
     public Date getStartTime() {

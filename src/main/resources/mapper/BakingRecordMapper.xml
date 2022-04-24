@@ -4,21 +4,43 @@
 
     <!--根据多个条件找烘烤-->
     <select id="findBakingRecordsByOptions" resultType="BakingRecord">
-        SELECT b.id,start_time,
-        end_time,location,
-        parent_location,station_id,b.device_id as device_id,
+        SELECT
+        b.id,
+        start_time,
+        end_time,
+        location,
+        parent_location,
+        station_id,
+        b.device_id AS device_id,
         baking_weight_before,
         baking_weight_after,
-        farmer_id,technician_id,phone,nname,
-        score from (select br.id,start_time,
-        end_time,location,
-        parent_location,station_id,br.device_id as device_id,
-        baking_weight_before,
-        baking_weight_after,
-        farmer_id,technician_id,
+        farmer_id,
+        technician_id,
+        phone,
+        nname,
         score
-        from baking_records br left join
-        (select id, location,parent_location,station_id,device_id from bakehouse_info) bi on br.device_id=bi.device_id) b
+        FROM
+        (
+        SELECT
+        br.id,
+        start_time,
+        end_time,
+        location,
+        parent_location,
+        station_id,
+        br.device_id AS device_id,
+        baking_weight_before,
+        baking_weight_after,
+        farmer_id,
+        technician_id,
+        score
+        FROM
+        baking_records br
+        LEFT JOIN ( SELECT location, parent_location,
+        device_id, binfo.station_id
+        FROM bakehouse_info binfo LEFT JOIN stations
+        s ON binfo.station_id = s.station_id ) bi ON br.device_id = bi.device_id
+        ) b
         LEFT JOIN (select user_id,phone,nname from user) u on
         <if test="technicianId == null ">
             b.farmer_id= u.user_id
@@ -98,13 +120,13 @@
                                     score)
         values (#{deviceId,jdbcType=VARCHAR},
                 #{startTime,jdbcType=TIMESTAMP},
-            #{endTime,jdbcType=TIMESTAMP},
-             #{bakingWeightBefore,jdbcType=DOUBLE},
-            #{bakingWeightAfter,jdbcType=DOUBLE},
-            #{tobaccoInfo,jdbcType=VARCHAR},
-            #{farmerId,jdbcType=VARCHAR},
-            #{technicianId,jdbcType=VARCHAR},
-            #{score,jdbcType=DOUBLE})
+                #{endTime,jdbcType=TIMESTAMP},
+                #{bakingWeightBefore,jdbcType=DOUBLE},
+                #{bakingWeightAfter,jdbcType=DOUBLE},
+                #{tobaccoInfo,jdbcType=VARCHAR},
+                #{farmerId,jdbcType=VARCHAR},
+                #{technicianId,jdbcType=VARCHAR},
+                #{score,jdbcType=DOUBLE})
 
     </insert>
 

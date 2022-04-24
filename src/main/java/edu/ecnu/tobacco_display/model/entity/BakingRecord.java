@@ -39,6 +39,9 @@ public class BakingRecord {
     private String location;
     @JsonProperty("parent_location")
     private String parentLocation;
+    @JsonProperty("station_id")
+    private String stationId;
+
     @JsonProperty("tobacco_info")
     private String tobaccoInfo;
 
@@ -46,8 +49,6 @@ public class BakingRecord {
     private String farmerId;
     @JsonProperty("technician_id")
     private String technicianId;
-    @JsonProperty("station_id")
-    private String stationId;
     @JsonProperty("phone")
     private String phone;
     @JsonProperty("nname")

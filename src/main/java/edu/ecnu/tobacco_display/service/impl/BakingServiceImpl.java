@@ -1,6 +1,7 @@
 package edu.ecnu.tobacco_display.service.impl;
 
 import edu.ecnu.tobacco_display.mapper.BakingMapper;
+import edu.ecnu.tobacco_display.model.entity.BakingFigure;
 import edu.ecnu.tobacco_display.model.entity.BakingRecord;
 import edu.ecnu.tobacco_display.model.entity.BakingWarning;
 import edu.ecnu.tobacco_display.service.BakingService;
@@ -27,6 +28,13 @@ public class BakingServiceImpl implements BakingService {
         BakingWarning warning = parseToWarning(queryOptions);
         List<BakingWarning> warningList = bakingMapper.findWarningsByOptions(warning);
         return warningList;
+    }
+
+    @Override
+    public List<BakingFigure> findBakingFiguresByOptions(Map<String, String> queryOptions) {
+        BakingFigure bakingFigure = parseToBakingFigure(queryOptions);
+        List<BakingFigure> figuresList = bakingMapper.findBakingFiguresByOptions(bakingFigure);
+        return figuresList;
     }
 
     @Override
@@ -92,6 +100,10 @@ public class BakingServiceImpl implements BakingService {
 
         }
 
+        if (queryOptionMap.containsKey("station_id")) {
+            warning.setStationId(queryOptionMap.get("station_id"));
+
+        }
         if (queryOptionMap.containsKey("location")) {
             warning.setLocation(queryOptionMap.get("location"));
 
@@ -142,6 +154,10 @@ public class BakingServiceImpl implements BakingService {
             bakingRecord.setDeviceId(queryOptionMap.get("device_id"));
         }
 
+        if (queryOptionMap.containsKey("station_id")) {
+            bakingRecord.setStationId(queryOptionMap.get("station_id"));
+
+        }
         if (queryOptionMap.containsKey("location")) {
             bakingRecord.setLocation(queryOptionMap.get("location"));
 
@@ -185,8 +201,54 @@ public class BakingServiceImpl implements BakingService {
             bakingRecord.setTobaccoInfo("tobacco_info");
         }
 
-        bakingRecord.toString();
         return bakingRecord;
     }
+
+    private BakingFigure parseToBakingFigure(Map<String, String> queryOptionMap) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        BakingFigure bakingFigure = new BakingFigure();
+        try {
+            if (queryOptionMap.containsKey("find_start_time")) {
+                bakingFigure.setFindStartTime(simpleDateFormat.parse(
+                        queryOptionMap.get("find_start_time")));
+            }
+            if (queryOptionMap.containsKey("find_end_time")) {
+                bakingFigure.setFindEndTime(simpleDateFormat.parse(
+                        queryOptionMap.get("find_end_time")));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (queryOptionMap.containsKey("station_id")) {
+            bakingFigure.setStationId(queryOptionMap.get("station_id"));
+
+        }
+        if (queryOptionMap.containsKey("location")) {
+            bakingFigure.setLocation(queryOptionMap.get("location"));
+
+        }
+        if (queryOptionMap.containsKey("parent_location")) {
+            bakingFigure.setParentLocation(queryOptionMap.get("parent_location"));
+        }
+
+
+        if (queryOptionMap.containsKey("score_upper_bound")) {
+            bakingFigure.setScoreUpperBound(
+                    Double.valueOf(queryOptionMap.get("score_upper_bound")));
+        }
+
+        if (queryOptionMap.containsKey("score_lower_bound")) {
+            bakingFigure.setScoreLowerBound(
+                    Double.valueOf(queryOptionMap.get("score_lower_bound")));
+        }
+
+        if (queryOptionMap.containsKey("tobacco_info")) {
+            bakingFigure.setTobaccoInfo("tobacco_info");
+        }
+
+        return bakingFigure;
+    }
+
 
 }

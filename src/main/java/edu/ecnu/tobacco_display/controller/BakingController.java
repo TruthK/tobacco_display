@@ -1,5 +1,6 @@
 package edu.ecnu.tobacco_display.controller;
 
+import edu.ecnu.tobacco_display.model.entity.BakingFigure;
 import edu.ecnu.tobacco_display.model.entity.BakingWarning;
 import edu.ecnu.tobacco_display.model.entity.BakingRecord;
 import edu.ecnu.tobacco_display.service.BakingService;
@@ -35,10 +36,10 @@ public class BakingController {
         return warningList != null ? JsonData.buildSuccess(warningList) : JsonData.buildError("请确认输入无误");
     }
 
-    @PostMapping("addBakingRecord")
-    public JsonData addBakingRecord(@RequestBody Map<String, String> bakingRecordInfo) {
-        int rows = bakingService.saveBakingRecord(bakingRecordInfo);
-        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("请确认输入无误");
+    @PostMapping("findBakingFiguresByOptions")
+    public JsonData findBakingFiguresByOptions(@RequestBody Map<String, String> bakingFigureInfo) {
+        List<BakingFigure> figureList = bakingService.findBakingFiguresByOptions(bakingFigureInfo);
+        return figureList != null ? JsonData.buildSuccess(figureList) : JsonData.buildError("请确认输入无误");
     }
 
     @PostMapping("findBakingRecordsByOptions")
@@ -46,6 +47,13 @@ public class BakingController {
         List<BakingRecord> bakingRecords = bakingService.findBakingRecordsByOptions(bakingRecordInfo);
         return bakingRecords != null ? JsonData.buildSuccess(bakingRecords) : JsonData.buildError("请确认输入无误");
     }
+
+    @PostMapping("addBakingRecord")
+    public JsonData addBakingRecord(@RequestBody Map<String, String> bakingRecordInfo) {
+        int rows = bakingService.saveBakingRecord(bakingRecordInfo);
+        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("请确认输入无误");
+    }
+
 
     @PostMapping("alterBakingRecord")
     public JsonData alterBakingRecord(@RequestBody Map<String, String> bakingRecordInfo) {
