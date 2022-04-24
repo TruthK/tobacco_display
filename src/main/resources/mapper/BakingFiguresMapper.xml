@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.BakingMapper">
+
+    <select id="findBakingFiguresByOptions" resultType="BakingFigure">
+        select
+        sum(baking_before),
+        sum(baking_after),
+        end_time,
+        tobacco_info,
+        avg(score) as score
+        <if test="location != null ">
+            ,station_id
+        </if>
+        <if test="parentLocation != null ">
+            ,location
+        </if>
+        <if test=" stationId == null and location == null and
+            parentLocation == null ">
+            ,parent_location
+        </if>
+        from baking_figures
+        <trim prefix="where" suffixOverrides="and">
+            <if test="findStartTime != null ">
+            end_time &gt; #{findStartTime,jdbcType=TIMESTAMP} and</if>
+            <if test="findEndTime != null ">
+            end_time &lt; #{findEndTime,jdbcType=TIMESTAMP} and</if>
+            <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
+            <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
+            <if test="stationId != null ">station_id = #{stationId} and</if>
+        </trim>
+        <trim prefix="group by" suffixOverrides=",">
+            tobacco_info, end_time,
+            <if test="location != null">
+                station_id
+            </if>
+            <if test="parentLocation != null">
+                location
+            </if>
+            <if test="stationId == null and location == null and
+            parentLocation == null ">
+                parent_location
+            </if>
+
+        </trim>
+        limit 1000
+    </select>
+
+
+</mapper>
