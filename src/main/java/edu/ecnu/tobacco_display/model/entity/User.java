@@ -3,6 +3,8 @@ package edu.ecnu.tobacco_display.model.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 
@@ -13,33 +15,41 @@ import java.util.Date;
  * `password` VARCHAR(256) NOT NULL COMMENT '用户密码',
  * `nname` VARCHAR(16) NOT NULL COMMENT '用户昵称',
  * `category` varchar(32) DEFAULT '1' COMMENT '类别',
- * `head_img` VARCHAR(256) COMMENT '湿球目标温度',
+ * `head_img` VARCHAR(256) COMMENT '头像图片',
  * `create_time` timestamp NULL default CURRENT_TIMESTAMP COMMENT '用户创建时间',
  * PRIMARY KEY (user_id),
  * index info(user_id,phone))ENGINE=InnoDB DEFAULT CHARSET=utf8;
  *
  * @author TruthK
  */
+@ApiModel("用户实体类")
 public class User {
     @JsonProperty("nname")
+    @ApiModelProperty(value = "用户昵称", required = true, example = "测试用户昵称")
     private String nname;
 
     @JsonIgnore
+    @ApiModelProperty(value = "用户密码", required = true, example = "123456")
     private String password;
 
     @JsonProperty("head_img")
+    @ApiModelProperty(value = "用户密码", required = false)
     private String headImg;
     @JsonProperty("user_id")
+    @ApiModelProperty(value = "用户id", required = true, example = "admin")
     private String userId;
 
 
     @JsonProperty("phone")
+    @ApiModelProperty(value = "手机号", required = true, example = "15021118366")
     private String phone;
 
     @JsonProperty("category")
+    @ApiModelProperty(value = "类别", required = true, example = "1")
     private String category;
 
     @JsonProperty("permission_range")
+    @ApiModelProperty(value = "？？", required = false, example = "671000")
     private String permissionRange;
 
     @JsonProperty("create_time")
