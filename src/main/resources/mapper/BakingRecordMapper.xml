@@ -117,7 +117,11 @@
                                     baking_weight_after,
                                     tobacco_info, farmer_id,
                                     technician_id,
-                                    score)
+                                    score,
+                                    loss_rate,
+                                    cyanosis_rate,
+                                    noise_rate,
+                                    yellow_rate)
         values (#{deviceId,jdbcType=VARCHAR},
                 #{startTime,jdbcType=TIMESTAMP},
                 #{endTime,jdbcType=TIMESTAMP},
@@ -126,7 +130,11 @@
                 #{tobaccoInfo,jdbcType=VARCHAR},
                 #{farmerId,jdbcType=VARCHAR},
                 #{technicianId,jdbcType=VARCHAR},
-                #{score,jdbcType=DOUBLE})
+                #{score,jdbcType=DOUBLE},
+                #{lossRate,jdbcType=DOUBLE},
+                #{cyanosisRate,jdbcType=DOUBLE},
+                #{noiseRate,jdbcType=DOUBLE},
+                #{yellowRate,jdbcType=DOUBLE})
 
     </insert>
 

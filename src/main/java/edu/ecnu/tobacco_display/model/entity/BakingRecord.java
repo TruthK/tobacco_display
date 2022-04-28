@@ -28,12 +28,45 @@ public class BakingRecord {
     private double bakingWeightBefore;
     @JsonProperty("baking_weight_after")
     private double bakingWeightAfter;
+
+
     @JsonProperty("score")
     private double score;
     @JsonProperty("score_upper_bound")
     private double scoreUpperBound;
     @JsonProperty("score_lower_bound")
     private double scoreLowerBound;
+
+
+    @JsonProperty("loss_rate")
+    private double lossRate;
+    @JsonProperty("loss_rate_upper_bound")
+    private double lossRateUpperBound;
+    @JsonProperty("loss_rate_lower_bound")
+    private double lossRateLowerBound;
+
+    @JsonProperty("cyanosis_rate")
+    private double cyanosisRate;
+    @JsonProperty("cyanosis_rate_upper_bound")
+    private double cyanosisRateUpperBound;
+    @JsonProperty("cyanosis_rate_lower_bound")
+    private double cyanosisRateLowerBound;
+
+    @JsonProperty("noise_rate")
+    private double noiseRate;
+    @JsonProperty("noise_rate_upper_bound")
+    private double noiseRateUpperBound;
+    @JsonProperty("noise_rate_lower_bound")
+    private double noiseRateLowerBound;
+
+
+    @JsonProperty("yellow_rate")
+    private double yellowRate;
+    @JsonProperty("yellow_rate_upper_bound")
+    private double yellowRateUpperBound;
+    @JsonProperty("yellow_rate_lower_bound")
+    private double yellowRateLowerBound;
+
 
     @JsonProperty("location")
     private String location;
@@ -72,6 +105,7 @@ public class BakingRecord {
     public void setScoreLowerBound(double scoreLowerBound) {
         this.scoreLowerBound = scoreLowerBound;
     }
+
     public int getId() {
         return id;
     }
@@ -208,28 +242,100 @@ public class BakingRecord {
         this.nname = nname;
     }
 
-    @Override
-    public String toString() {
-        return "BakingRecord{" +
-                "id=" + id +
-                ", deviceId='" + deviceId + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", findStartTime=" + findStartTime +
-                ", findEndTime=" + findEndTime +
-                ", bakingWeightBefore=" + bakingWeightBefore +
-                ", bakingWeightAfter=" + bakingWeightAfter +
-                ", score=" + score +
-                ", scoreUpperBound=" + scoreUpperBound +
-                ", scoreLowerBound=" + scoreLowerBound +
-                ", location='" + location + '\'' +
-                ", parentLocation='" + parentLocation + '\'' +
-                ", tobaccoInfo='" + tobaccoInfo + '\'' +
-                ", farmerId='" + farmerId + '\'' +
-                ", technicianId='" + technicianId + '\'' +
-                ", stationId='" + stationId + '\'' +
-                ", phone='" + phone + '\'' +
-                ", nname='" + nname + '\'' +
-                '}';
+    public double getLossRate() {
+        return lossRate;
     }
+
+    public void setLossRate(double lossRate) {
+        this.lossRate = lossRate;
+    }
+
+    public double getLossRateUpperBound() {
+        return lossRateUpperBound;
+    }
+
+    public void setLossRateUpperBound(double lossRateUpperBound) {
+        this.lossRateUpperBound = lossRateUpperBound;
+    }
+
+    public double getLossRateLowerBound() {
+        return lossRateLowerBound;
+    }
+
+    public void setLossRateLowerBound(double lossRateLowerBound) {
+        this.lossRateLowerBound = lossRateLowerBound;
+    }
+
+    public double getCyanosisRate() {
+        return cyanosisRate;
+    }
+
+    public void setCyanosisRate(double cyanosisRate) {
+        this.cyanosisRate = cyanosisRate;
+    }
+
+    public double getCyanosisRateUpperBound() {
+        return cyanosisRateUpperBound;
+    }
+
+    public void setCyanosisRateUpperBound(double cyanosisRateUpperBound) {
+        this.cyanosisRateUpperBound = cyanosisRateUpperBound;
+    }
+
+    public double getCyanosisRateLowerBound() {
+        return cyanosisRateLowerBound;
+    }
+
+    public void setCyanosisRateLowerBound(double cyanosisRateLowerBound) {
+        this.cyanosisRateLowerBound = cyanosisRateLowerBound;
+    }
+
+    public double getNoiseRate() {
+        return noiseRate;
+    }
+
+    public void setNoiseRate(double noiseRate) {
+        this.noiseRate = noiseRate;
+    }
+
+    public double getNoiseRateUpperBound() {
+        return noiseRateUpperBound;
+    }
+
+    public void setNoiseRateUpperBound(double noiseRateUpperBound) {
+        this.noiseRateUpperBound = noiseRateUpperBound;
+    }
+
+    public double getNoiseRateLowerBound() {
+        return noiseRateLowerBound;
+    }
+
+    public void setNoiseRateLowerBound(double noiseRateLowerBound) {
+        this.noiseRateLowerBound = noiseRateLowerBound;
+    }
+
+    public double getYellowRate() {
+        return yellowRate;
+    }
+
+    public void setYellowRate(double yellowRate) {
+        this.yellowRate = yellowRate;
+    }
+
+    public double getYellowRateUpperBound() {
+        return yellowRateUpperBound;
+    }
+
+    public void setYellowRateUpperBound(double yellowRateUpperBound) {
+        this.yellowRateUpperBound = yellowRateUpperBound;
+    }
+
+    public double getYellowRateLowerBound() {
+        return yellowRateLowerBound;
+    }
+
+    public void setYellowRateLowerBound(double yellowRateLowerBound) {
+        this.yellowRateLowerBound = yellowRateLowerBound;
+    }
+
 }

@@ -7,13 +7,21 @@ INSERT into baking_figures (
            parent_location,
            tobacco_info,
            avg(score)   as score,
-           bi.station_id
+           bi.station_id,
+           avg(loss_rate)   as loss_rate,
+           avg(cyanosis_rate)   as cyanosis_rate,
+           avg(noise_rate)   as noise_rate,
+           avg(yellow_rate)   as yellow_rate
     from (SELECT baking_weight_before,
                  baking_weight_after,
                  tobacco_info,
                  device_id,
                  DATE_FORMAT(end_time, '%Y-%m-%d') as end_time,
-                 score
+                 score,
+                 loss_rate,
+                 cyanosis_rate,
+                 noise_rate,
+                 yellow_rate
           from baking_records) br
              left JOIN (select bi.device_id,
                                bi.address,

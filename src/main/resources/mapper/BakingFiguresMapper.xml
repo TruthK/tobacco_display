@@ -8,7 +8,11 @@
         sum(baking_after),
         end_time,
         tobacco_info,
-        avg(score) as score
+        avg(score) as score,
+        avg(loss_rate) as loss_rate,
+        avg(cyanosis_rate) as cyanosis_rate,
+        avg(noise_rate) as noise_rate,
+        avg(yellow_rate) as yellow_rate
         <if test="location != null ">
             ,station_id
         </if>
@@ -21,10 +25,28 @@
         </if>
         from baking_figures
         <trim prefix="where" suffixOverrides="and">
+            <if test="scoreUpperBound >0 ">score &lt; #{scoreUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="scoreLowerBound  >0 ">score &gt; #{scoreLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="lossRateUpperBound >0 ">loss_rate &lt; #{lossRateUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="lossRateLowerBound  >0 ">loss_rate &gt; #{lossRateLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="cyanosisRateUpperBound >0 ">cyanosis_rate &lt; #{cyanosisRateUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="cyanosisRateLowerBound  >0 ">cyanosis_rate &gt; #{cyanosisRateLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="noiseRateUpperBound >0 ">noise_rate &lt; #{noiseRateUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="noiseRateLowerBound  >0 ">noise_rate &gt; #{noiseRateLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="yellowRateUpperBound >0 ">yellow_rate &lt; #{yellowRateUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="yellowRateLowerBound  >0 ">yellow_rate &gt; #{yellowRateLowerBound,jdbcType=DOUBLE} and</if>
+
+
             <if test="findStartTime != null ">
-            end_time &gt; #{findStartTime,jdbcType=TIMESTAMP} and</if>
+                end_time &gt; #{findStartTime,jdbcType=TIMESTAMP} and
+            </if>
             <if test="findEndTime != null ">
-            end_time &lt; #{findEndTime,jdbcType=TIMESTAMP} and</if>
+                end_time &lt; #{findEndTime,jdbcType=TIMESTAMP} and
+            </if>
             <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
             <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
             <if test="stationId != null ">station_id = #{stationId} and</if>
