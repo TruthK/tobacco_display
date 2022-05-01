@@ -11,7 +11,6 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @EnableTransactionManagement
 @EnableOpenApi
 public class TobaccoDisplayApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(TobaccoDisplayApplication.class, args);
     }

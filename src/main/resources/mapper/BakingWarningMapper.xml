@@ -43,8 +43,8 @@
         ON br.device_id = bs.device_id) bi
         on bw.device_id=bi.device_id
         <trim prefix="where" suffixOverrides="and">
-            <if test="startTime != null ">warning_time &gt; #{startTime,jdbcType=TIMESTAMP} and</if>
-            <if test="endTime != null ">warning_time &lt; #{endTime,jdbcType=TIMESTAMP} and</if>
+            <if test="startTime != null ">warning_time &gt;= #{startTime,jdbcType=TIMESTAMP} and</if>
+            <if test="endTime != null ">warning_time &lt;= #{endTime,jdbcType=TIMESTAMP} and</if>
             <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
             <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
             <if test="deviceId != null ">bw.device_id = #{deviceId,jdbcType=VARCHAR} and</if>

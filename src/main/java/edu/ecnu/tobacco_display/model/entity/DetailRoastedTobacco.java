@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
  * <p>
  * CREATE TABLE IF NOT EXISTS `bakehouse_sensors_records`(
  * `produce_date` DATETIME NOT NULL COMMENT '传感器数据产生的时间',
@@ -30,17 +29,54 @@ public class DetailRoastedTobacco {
     private Date produceDate;
 
     private Double dryBallTemp;
+    @JsonProperty("dry_ball_temp_upper_bound")
+    private double dryBallTempUpperBound;
+    @JsonProperty("dry_ball_temp_lower_bound")
+    private double dryBallTempLowerBound;
+
     private Double wetBallTemp;
+    @JsonProperty("wet_ball_temp_upper_bound")
+    private double wetBallTempUpperBound;
+    @JsonProperty("wet_ball_temp_lower_bound")
+    private double wetBallTempLowerBound;
+
     private Double dryBallTarget;
+    @JsonProperty("dry_ball_target_upper_bound")
+    private double dryBallTargetUpperBound;
+    @JsonProperty("dry_ball_target_lower_bound")
+    private double dryBallTargetLowerBound;
+
     private Double wetBallTarget;
+    @JsonProperty("wet_ball_target_upper_bound")
+    private double wetBallTargetUpperBound;
+    @JsonProperty("wet_ball_target_lower_bound")
+    private double wetBallTargetLowerBound;
+
+    @JsonProperty("start_time")
+    private Date startTime;
+    @JsonProperty("end_time")
+    private Date endTime;
 
     @JsonProperty("location")
     private String location;
     @JsonProperty("device_id")
     private String deviceId;
 
-//    @JsonProperty("roasted_tobacco_list")
-//    private List<DetailRoastedTobacco> detailRoastedTobaccoList;
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
     public Integer getId() {
         return id;
@@ -106,4 +142,67 @@ public class DetailRoastedTobacco {
         this.deviceId = deviceId;
     }
 
+    public double getDryBallTempUpperBound() {
+        return dryBallTempUpperBound;
+    }
+
+    public void setDryBallTempUpperBound(double dryBallTempUpperBound) {
+        this.dryBallTempUpperBound = dryBallTempUpperBound;
+    }
+
+    public double getDryBallTempLowerBound() {
+        return dryBallTempLowerBound;
+    }
+
+    public void setDryBallTempLowerBound(double dryBallTempLowerBound) {
+        this.dryBallTempLowerBound = dryBallTempLowerBound;
+    }
+
+    public double getWetBallTempUpperBound() {
+        return wetBallTempUpperBound;
+    }
+
+    public void setWetBallTempUpperBound(double wetBallTempUpperBound) {
+        this.wetBallTempUpperBound = wetBallTempUpperBound;
+    }
+
+    public double getWetBallTempLowerBound() {
+        return wetBallTempLowerBound;
+    }
+
+    public void setWetBallTempLowerBound(double wetBallTempLowerBound) {
+        this.wetBallTempLowerBound = wetBallTempLowerBound;
+    }
+
+    public double getDryBallTargetUpperBound() {
+        return dryBallTargetUpperBound;
+    }
+
+    public void setDryBallTargetUpperBound(double dryBallTargetUpperBound) {
+        this.dryBallTargetUpperBound = dryBallTargetUpperBound;
+    }
+
+    public double getDryBallTargetLowerBound() {
+        return dryBallTargetLowerBound;
+    }
+
+    public void setDryBallTargetLowerBound(double dryBallTargetLowerBound) {
+        this.dryBallTargetLowerBound = dryBallTargetLowerBound;
+    }
+
+    public double getWetBallTargetUpperBound() {
+        return wetBallTargetUpperBound;
+    }
+
+    public void setWetBallTargetUpperBound(double wetBallTargetUpperBound) {
+        this.wetBallTargetUpperBound = wetBallTargetUpperBound;
+    }
+
+    public double getWetBallTargetLowerBound() {
+        return wetBallTargetLowerBound;
+    }
+
+    public void setWetBallTargetLowerBound(double wetBallTargetLowerBound) {
+        this.wetBallTargetLowerBound = wetBallTargetLowerBound;
+    }
 }
