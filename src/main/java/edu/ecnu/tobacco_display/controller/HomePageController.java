@@ -35,8 +35,8 @@ public class HomePageController {
     public JsonData queryDistribution(@RequestBody Map<String, Date> timeRange) {
         Date startTime = timeRange.get("startTime");
         Date endTime = timeRange.get("endTime");
-        String cityMapJson = (String) redisTemplate.opsForValue().get("city_map");
-        CityMap cityMap = JSON.parseObject(cityMapJson, CityMap.class);
+        byte[] bytes = (byte[]) redisTemplate.opsForValue().get("city_map");
+        CityMap cityMap = (CityMap) SerializeUtil.unserialize(bytes);
 //        if (bytes.length <= 2) {
 //            CityMap cityMap = null;
 //            byte[] serialize = SerializeUtil.serialize(cityMap);

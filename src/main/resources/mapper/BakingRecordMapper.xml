@@ -18,7 +18,11 @@
         technician_id,
         phone,
         nname,
-        score
+        score,
+        loss_rate,
+        cyanosis_rate,
+        noise_rate,
+        yellow_rate
         FROM
         (
         SELECT
@@ -33,7 +37,11 @@
         baking_weight_after,
         farmer_id,
         technician_id,
-        score
+        score,
+        loss_rate,
+        cyanosis_rate,
+        noise_rate,
+        yellow_rate
         FROM
         baking_records br
         LEFT JOIN ( SELECT location, parent_location,
@@ -50,8 +58,8 @@
         </if>
 
         <trim prefix="where" suffixOverrides="and">
-            <if test="findStartTime != null ">start_time &gt; #{findStartTime,jdbcType=TIMESTAMP} and</if>
-            <if test="findEndTime != null ">start_time &lt; #{findEndTime,jdbcType=TIMESTAMP} and</if>
+            <if test="findStartTime != null ">start_time &gt;= #{findStartTime,jdbcType=TIMESTAMP} and</if>
+            <if test="findEndTime != null ">start_time &lt;= #{findEndTime,jdbcType=TIMESTAMP} and</if>
 
             <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
             <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
@@ -66,8 +74,21 @@
                 (technician_id=#{technicianId,jdbcType=VARCHAR}
                 or phone=#{technicianId,jdbcType=VARCHAR} ) and
             </if>
-            <if test="scoreLowerBound >0 ">score &gt;= #{scoreLowerBound,jdbcType=DOUBLE} and</if>
-            <if test="scoreUpperBound >0 ">score &lt;= #{scoreUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="scoreLowerBound >0 ">score &gt;== #{scoreLowerBound,jdbcType=DOUBLE} and</if>
+            <if test="scoreUpperBound >0 ">score &lt;== #{scoreUpperBound,jdbcType=DOUBLE} and</if>
+
+            <if test="lossRateUpperBound >0 ">loss_rate &lt;= #{lossRateUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="lossRateLowerBound  >0 ">loss_rate &gt;= #{lossRateLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="cyanosisRateUpperBound >0 ">cyanosis_rate &lt;= #{cyanosisRateUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="cyanosisRateLowerBound  >0 ">cyanosis_rate &gt;= #{cyanosisRateLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="noiseRateUpperBound >0 ">noise_rate &lt;= #{noiseRateUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="noiseRateLowerBound  >0 ">noise_rate &gt;= #{noiseRateLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="yellowRateUpperBound >0 ">yellow_rate &lt;= #{yellowRateUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="yellowRateLowerBound  >0 ">yellow_rate &gt;= #{yellowRateLowerBound,jdbcType=DOUBLE} and</if>
+
         </trim>
     </select>
 
@@ -102,6 +123,18 @@
             <if test="score >0 ">
                 score=#{score,jdbcType=DOUBLE} ,
             </if>
+            <if test="lossRate >0 ">
+                score=#{loss_rate,jdbcType=DOUBLE} ,
+            </if>
+            <if test="cyanosisRate >0 ">
+                score=#{cyanosis_rate,jdbcType=DOUBLE} ,
+            </if>
+            <if test="noiseRate >0 ">
+                score=#{noise_rate,jdbcType=DOUBLE} ,
+            </if>
+            <if test="yellowRate >0 ">
+                score=#{yellow_rate,jdbcType=DOUBLE} ,
+            </if>
             <if test="tobaccoInfo != null ">
                 tobacco_info=#{tobaccoInfo,jdbcType=VARCHAR} ,
             </if>
@@ -117,7 +150,11 @@
                                     baking_weight_after,
                                     tobacco_info, farmer_id,
                                     technician_id,
-                                    score)
+                                    score,
+                                    loss_rate,
+                                    cyanosis_rate,
+                                    noise_rate,
+                                    yellow_rate)
         values (#{deviceId,jdbcType=VARCHAR},
                 #{startTime,jdbcType=TIMESTAMP},
                 #{endTime,jdbcType=TIMESTAMP},
@@ -126,7 +163,11 @@
                 #{tobaccoInfo,jdbcType=VARCHAR},
                 #{farmerId,jdbcType=VARCHAR},
                 #{technicianId,jdbcType=VARCHAR},
-                #{score,jdbcType=DOUBLE})
+                #{score,jdbcType=DOUBLE},
+                #{lossRate,jdbcType=DOUBLE},
+                #{cyanosisRate,jdbcType=DOUBLE},
+                #{noiseRate,jdbcType=DOUBLE},
+                #{yellowRate,jdbcType=DOUBLE})
 
     </insert>
 

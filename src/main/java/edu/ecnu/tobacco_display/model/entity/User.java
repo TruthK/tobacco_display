@@ -25,7 +25,7 @@ import java.util.Date;
 @ApiModel("用户实体类")
 public class User {
     @JsonProperty("nname")
-    @ApiModelProperty(value = "用户昵称", required = true, example = "测试用户昵称")
+    @ApiModelProperty(value = "用户昵称", required = false, example = "测试用户昵称")
     private String nname;
 
     @JsonIgnore
@@ -33,7 +33,7 @@ public class User {
     private String password;
 
     @JsonProperty("head_img")
-    @ApiModelProperty(value = "用户密码", required = false)
+    @ApiModelProperty(value = "用户头像", required = false)
     private String headImg;
     @JsonProperty("user_id")
     @ApiModelProperty(value = "用户id", required = true, example = "admin")
@@ -41,18 +41,20 @@ public class User {
 
 
     @JsonProperty("phone")
-    @ApiModelProperty(value = "手机号", required = true, example = "15021118366")
+    @ApiModelProperty(value = "手机号", required = false, example = "15021118366")
     private String phone;
 
     @JsonProperty("category")
-    @ApiModelProperty(value = "类别", required = true, example = "1")
+    @ApiModelProperty(value = "权限类别", required = false, example = "1")
     private String category;
 
     @JsonProperty("permission_range")
-    @ApiModelProperty(value = "？？", required = false, example = "671000")
+    @ApiModelProperty(value = "权限范围（烟站），针对烟站人员和普通用户",
+            required = false, example = "671000")
     private String permissionRange;
 
     @JsonProperty("create_time")
+    @ApiModelProperty(value = "用户创建时间", required = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 

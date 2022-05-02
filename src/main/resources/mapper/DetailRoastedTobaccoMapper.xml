@@ -5,18 +5,26 @@
     <select id="findDetailByOptions" resultType="DetailRoastedTobacco">
         select * from bakehouse_sensors_records
         <trim prefix="where" suffixOverrides="and">
-            <if test="startTime != null ">produce_date &gt; #{startTime,jdbcType=TIMESTAMP} and</if>
+            <if test="startTime != null ">produce_date &gt;== #{startTime,jdbcType=TIMESTAMP} and</if>
 
-            <if test="endTime != null ">produce_date &lt; #{endTime,jdbcType=TIMESTAMP} and</if>
+            <if test="endTime != null ">produce_date &lt;= #{endTime,jdbcType=TIMESTAMP} and</if>
 
             <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
 
             <if test="deviceId != null ">device_id = #{deviceId,jdbcType=VARCHAR} and</if>
 
-            <if test="dryBallTemp != -999 ">dry_ball_Temp &lt; #{dryBallTemp,jdbcType=DOUBLE} and</if>
-            <if test="wetBallTemp != -999 ">wet_ball_Temp &lt; #{wetBallTemp,jdbcType=DOUBLE} and</if>
-            <if test="dryBallTarget != -999 ">dry_ball_target &lt; #{dryBallTarget,jdbcType=DOUBLE} and</if>
-            <if test="wetBallTarget != -999 ">wet_ball_target &lt; #{wetBallTarget,jdbcType=DOUBLE} and</if>
+            <if test="dryBallTempUpperBound >0 ">dry_ball_Temp &lt;= #{dryBallTempUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="dryBallTempLowerBound >0 ">dry_ball_Temp &gt;= #{dryBallTempLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="wetBallTempUpperBound >0 ">wet_ball_Temp &lt;= #{wetBallTempUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="wetBallTempLowerBound >0 ">wet_ball_Temp &gt;= #{wetBallTempLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="dryBallTargetUpperBound >0 ">dry_ball_target &lt;= #{dryBallTargetUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="dryBallTargetLowerBound >0 ">dry_ball_target &gt;= #{dryBallTargetLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="wetBallTargetUpperBound >0 ">wet_ball_target &lt;= #{wetBallTargetUpperBound,jdbcType=DOUBLE} and</if>
+            <if test="wetBallTargetLowerBound >0 ">wet_ball_target &gt;= #{wetBallTargetLowerBound,jdbcType=DOUBLE} and</if>
+
         </trim>
         limit 1000
     </select>

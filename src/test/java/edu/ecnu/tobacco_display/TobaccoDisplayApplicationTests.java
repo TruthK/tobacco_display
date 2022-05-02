@@ -11,7 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import java.io.UnsupportedEncodingException;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TobaccoDisplayApplicationTests {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -24,23 +24,21 @@ class TobaccoDisplayApplicationTests {
     public void test() throws UnsupportedEncodingException {
         String jsonString = ReadFromFile.readFileByLines("D:\\code\\tobacco_display\\src\\main\\resources\\city.json");
 
-//        jsonString = jsonString.replaceAll("^[　*| *| *|//s*]*", "").replaceAll("[　*| *| *|//s*]*$", "");
         byte[] utf8Bytes = jsonString.getBytes("UTF-8");
         jsonString = new String(utf8Bytes, "UTF-8");
-        //        System.out.println(jsonString);
 //        RedisUtils redisUtils = new RedisUtils();
 //        redisUtils.set("zyj", "redis后端三郎");
         CityMap object = JSON.parseObject(jsonString, CityMap.class);
 //        System.out.println(object);
         byte[] serialize = SerializeUtil.serialize(object);
 
-        redisTemplate.opsForValue().set("city_map", JSON.toJSONString(object));
+        redisTemplate.opsForValue().set("city_map", serialize);
 
-        String bytes = (String) redisTemplate.opsForValue().get("city_map");
-//        CityMap obj = (CityMap) SerializeUtil.unserialize(bytes);
+        byte[] bytes = (byte[]) redisTemplate.opsForValue().get("city_map");
+        CityMap obj = (CityMap) SerializeUtil.unserialize(bytes);
 
 //        redisTemplate.opsForValue().set("test_1","1111");
-        System.out.println(JSON.parseObject(bytes, CityMap.class).toString());
+        System.out.println(obj.toString());
     }
 
 }

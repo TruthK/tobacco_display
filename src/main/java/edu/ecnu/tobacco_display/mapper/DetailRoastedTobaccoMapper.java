@@ -12,6 +12,6 @@ public interface DetailRoastedTobaccoMapper {
      *
      * @return
      */
-    List<DetailRoastedTobacco> findDetailByOptions(QueryOptionsRequest queryOptionsRequest);
+    List<DetailRoastedTobacco> findDetailByOptions(DetailRoastedTobacco queryOptionsRequest);
 
 }
