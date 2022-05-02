@@ -48,4 +48,18 @@
     </select>
 
 
+    <!--查找技师-->
+    <select id="findTechnicians" resultType="User">
+        select *
+        from user
+        where category = 4
+        <if test="location != '' ">
+          and permission_range = #{location}
+        </if>
+        <if test="user_id != '' ">
+                  and (user_id = #{user_id} or phone = #{user_id})
+        </if>
+   </select>
+
+
 </mapper>

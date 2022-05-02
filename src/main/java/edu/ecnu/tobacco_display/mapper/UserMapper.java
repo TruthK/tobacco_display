@@ -11,9 +11,12 @@ public interface UserMapper {
 
     User findByPhone(@Param("phone") String phone);
 
-    User findByPhoneAndPassword(@Param("phone") String phone, @Param("password") String password);
-
     User findByUserIdAndPassword(@Param("user_id") String UserId, @Param("password") String password);
 
     User findByUserIdOrPhone(String userId);
+
+    User findTechnicians(@Param("location") String location,
+                         @Param("user_id") String userId);
+
+
 }

@@ -75,6 +75,12 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public User findTechnicians(String location,String userId) {
+        User user = userMapper.findTechnicians(location,userId);
+        return user;
+    }
+
     /**
      * 解析 user 对象
      *
