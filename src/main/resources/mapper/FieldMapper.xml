@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.FieldMapper">
+
+    <!--根据多个条件找烟田-->
+    <select id="findFieldByOptions" resultType="Field">
+        select f.field_id,f.location,f.info,u.user_id, u.nname
+        from field f join user u
+        on f.owner=u.user_id
+        <trim prefix="where" suffixOverrides="and">
+            <if test="fieldId != null ">f.field_id = #{fieldId,jdbcType=VARCHAR} and</if>
+            <if test="location != null ">f.location=#{location,jdbcType=VARCHAR} and</if>
+            <if test="info != null ">f.info=#{deviceName,jdbcType=VARCHAR} and</if>
+            <if test="owner != null ">f.owner=#{owner,jdbcType=VARCHAR} and</if>
+        </trim>
+    </select>
+
+
+    <update id="alterFieldInfo" parameterType="Field">
+        update field
+        set
+        <trim prefix="" suffixOverrides=",">
+            <if test="location != null ">
+                location = #{location,jdbcType=VARCHAR} ,
+            </if>
+            <if test="info != null ">
+                info=#{info,jdbcType=VARCHAR} ,
+            </if>
+            <if test="owner != null ">
+                owner=#{owner,jdbcType=VARCHAR} ,
+            </if>
+        </trim>
+        where field_id = #{fieldId,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="saveFieldInfo" parameterType="Field">
+
+        INSERT INTO field (field_id, location, info, owner)
+        values (#{fieldId,jdbcType=VARCHAR},
+                #{location,jdbcType=VARCHAR},
+                #{info,jdbcType=VARCHAR},
+                #{owner,jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteField" parameterType="Field">
+        DELETE
+        FROM field
+        WHERE field_id = #{fieldId,jdbcType=VARCHAR}
+    </delete>
+</mapper>
