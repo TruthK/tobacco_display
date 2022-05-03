@@ -35,4 +35,6 @@ public interface UserService {
 
     User findByUserIdOrPhone(String queryInfo);
 
+    User findTechnicians(String location,String userId);
+
 }

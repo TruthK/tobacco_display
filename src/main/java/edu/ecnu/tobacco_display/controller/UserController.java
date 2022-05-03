@@ -81,4 +81,21 @@ public class UserController {
         return JsonData.buildSuccess(user);
     }
 
+    /**
+     * 根据地区查询技师
+     *
+     * @param location
+     * @return
+     */
+    @GetMapping("findTechnicians")
+    @ApiOperation("根据用户id查询用户信息")
+    public JsonData findTechnicians(@RequestParam("location") String location,@RequestParam("user_id") String userId) {
+        if(location.length()>0||userId.length()>0){
+            User user = userService.findTechnicians(location,userId);
+            return JsonData.buildSuccess(user);
+        }else {
+            return JsonData.buildError("请确认输入无误");
+        }
+
+    }
 }
