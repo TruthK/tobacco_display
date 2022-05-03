@@ -55,11 +55,18 @@ public class TobaccoFieldServiceImpl implements TobaccoFieldService {
 
     private Field parseToField(Map<String, String> fieldInfo) {
         Field field = new Field();
-        if (fieldInfo.containsKey("field_id")) field.setFieldId(fieldInfo.get("field_id"));
-        if (fieldInfo.containsKey("fieldId")) field.setFieldId(fieldInfo.get("fieldId"));
-        if (fieldInfo.containsKey("location")) field.setLocation(fieldInfo.get("location"));
-        if (fieldInfo.containsKey("info")) field.setInfo(fieldInfo.get("info"));
-        if (fieldInfo.containsKey("owner")) field.setOwner(fieldInfo.get("owner"));
+        if (fieldInfo.containsKey("field_id")) {
+            field.setFieldId(fieldInfo.get("field_id"));
+        }
+        if (fieldInfo.containsKey("location")) {
+            field.setLocation(fieldInfo.get("location"));
+        }
+        if (fieldInfo.containsKey("info")) {
+            field.setInfo(fieldInfo.get("info"));
+        }
+        if (fieldInfo.containsKey("owner")) {
+            field.setOwner(fieldInfo.get("owner"));
+        }
         return field;
     }
 

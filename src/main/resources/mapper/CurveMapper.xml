@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.CurveMapper">
+
+    <!--根据多个条件找烤房-->
+    <select id="findCurveByOptions" resultType="Curve">
+        select kind,dry_or_wet,curve
+        from curve
+        <trim prefix="where" suffixOverrides="and">
+            <if test="kind != null ">kind=#{kind} and</if>
+            <if test="dryOrWet != null ">dry_or_wet=#{dryOrWet} and</if>
+        </trim>
+    </select>
+
+    <update id="alterCurveInfo" parameterType="Curve">
+        update curve
+        set
+        <trim prefix="" suffixOverrides=",">
+            <if test="kind != null ">kind=#{kind} ,</if>
+            <if test="dryOrWet != null ">dry_or_wet=#{dryOrWet} ,</if>
+            <if test="curve != null ">curve=#{curve} ,</if>
+
+        </trim>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <insert id="saveCurveInfo" parameterType="Curve">
+
+        INSERT INTO curve (kind, dry_or_wet, curve)
+        values (#{kind,jdbcType=VARCHAR}, #{dryOrWet,jdbcType=VARCHAR},
+                #{curve,jdbcType=VARCHAR})
+
+    </insert>
+
+    <delete id="deleteCurve" parameterType="Curve">
+        DELETE
+        FROM curve
+        WHERE id = #{id,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>
