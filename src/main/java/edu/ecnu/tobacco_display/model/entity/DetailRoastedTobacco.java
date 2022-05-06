@@ -62,6 +62,9 @@ public class DetailRoastedTobacco {
     @JsonProperty("device_id")
     private String deviceId;
 
+    @JsonProperty("pic")
+    private String pic;
+
     public Date getStartTime() {
         return startTime;
     }
@@ -204,5 +207,13 @@ public class DetailRoastedTobacco {
 
     public void setWetBallTargetLowerBound(double wetBallTargetLowerBound) {
         this.wetBallTargetLowerBound = wetBallTargetLowerBound;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

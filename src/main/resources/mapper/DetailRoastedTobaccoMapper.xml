@@ -5,7 +5,7 @@
     <select id="findDetailByOptions" resultType="DetailRoastedTobacco">
         select * from bakehouse_sensors_records
         <trim prefix="where" suffixOverrides="and">
-            <if test="startTime != null ">produce_date &gt;== #{startTime,jdbcType=TIMESTAMP} and</if>
+            <if test="startTime != null ">produce_date &gt;= #{startTime,jdbcType=TIMESTAMP} and</if>
 
             <if test="endTime != null ">produce_date &lt;= #{endTime,jdbcType=TIMESTAMP} and</if>
 

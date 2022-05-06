@@ -22,7 +22,9 @@
         loss_rate,
         cyanosis_rate,
         noise_rate,
-        yellow_rate
+        yellow_rate,
+        bake_pic_before,
+        bake_pic_after
         FROM
         (
         SELECT
@@ -41,7 +43,9 @@
         loss_rate,
         cyanosis_rate,
         noise_rate,
-        yellow_rate
+        yellow_rate,
+        bake_pic_before,
+        bake_pic_after
         FROM
         baking_records br
         LEFT JOIN ( SELECT location, parent_location,
@@ -81,7 +85,8 @@
             <if test="lossRateLowerBound  >0 ">loss_rate &gt;= #{lossRateLowerBound,jdbcType=DOUBLE} and</if>
 
             <if test="cyanosisRateUpperBound >0 ">cyanosis_rate &lt;= #{cyanosisRateUpperBound,jdbcType=DOUBLE} and</if>
-            <if test="cyanosisRateLowerBound  >0 ">cyanosis_rate &gt;= #{cyanosisRateLowerBound,jdbcType=DOUBLE} and</if>
+            <if test="cyanosisRateLowerBound  >0 ">cyanosis_rate &gt;= #{cyanosisRateLowerBound,jdbcType=DOUBLE} and
+            </if>
 
             <if test="noiseRateUpperBound >0 ">noise_rate &lt;= #{noiseRateUpperBound,jdbcType=DOUBLE} and</if>
             <if test="noiseRateLowerBound  >0 ">noise_rate &gt;= #{noiseRateLowerBound,jdbcType=DOUBLE} and</if>
@@ -139,6 +144,15 @@
                 tobacco_info=#{tobaccoInfo,jdbcType=VARCHAR} ,
             </if>
 
+            <if test="bakePicBefore != null ">
+                bake_pic_before=#{bakePicBefore,jdbcType=VARCHAR} ,
+            </if>
+
+            <if test="bakePicAfter != null ">
+                bake_pic_after=#{bakePicAfter,jdbcType=VARCHAR} ,
+            </if>
+
+
         </trim>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -154,7 +168,8 @@
                                     loss_rate,
                                     cyanosis_rate,
                                     noise_rate,
-                                    yellow_rate)
+                                    yellow_rate, bake_pic_before,
+                                    bake_pic_after)
         values (#{deviceId,jdbcType=VARCHAR},
                 #{startTime,jdbcType=TIMESTAMP},
                 #{endTime,jdbcType=TIMESTAMP},
@@ -167,7 +182,9 @@
                 #{lossRate,jdbcType=DOUBLE},
                 #{cyanosisRate,jdbcType=DOUBLE},
                 #{noiseRate,jdbcType=DOUBLE},
-                #{yellowRate,jdbcType=DOUBLE})
+                #{yellowRate,jdbcType=DOUBLE},
+                #{bakePicBefore,jdbcType=VARCHAR},
+                #{bakePicAfter,jdbcType=VARCHAR})
 
     </insert>
 

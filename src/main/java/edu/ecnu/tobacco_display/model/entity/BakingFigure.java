@@ -68,6 +68,7 @@ public class BakingFigure {
     @JsonProperty("tobacco_info")
     private String tobaccoInfo;
 
+
     public BakingFigure() {
     }
 
@@ -263,33 +264,5 @@ public class BakingFigure {
         this.tobaccoInfo = tobaccoInfo;
     }
 
-    @Override
-    public String toString() {
-        return "BakingFigure{" +
-                "endTime=" + endTime +
-                ", findStartTime=" + findStartTime +
-                ", findEndTime=" + findEndTime +
-                ", bakingWeightBefore=" + bakingWeightBefore +
-                ", bakingWeightAfter=" + bakingWeightAfter +
-                ", score=" + score +
-                ", scoreUpperBound=" + scoreUpperBound +
-                ", scoreLowerBound=" + scoreLowerBound +
-                ", lossRate=" + lossRate +
-                ", lossRateUpperBound=" + lossRateUpperBound +
-                ", lossRateLowerBound=" + lossRateLowerBound +
-                ", cyanosisRate=" + cyanosisRate +
-                ", cyanosisRateUpperBound=" + cyanosisRateUpperBound +
-                ", cyanosisRateLowerBound=" + cyanosisRateLowerBound +
-                ", noiseRate=" + noiseRate +
-                ", noiseRateUpperBound=" + noiseRateUpperBound +
-                ", noiseRateLowerBound=" + noiseRateLowerBound +
-                ", yellowRate=" + yellowRate +
-                ", yellowRateUpperBound=" + yellowRateUpperBound +
-                ", yellowRateLowerBound=" + yellowRateLowerBound +
-                ", stationId='" + stationId + '\'' +
-                ", location='" + location + '\'' +
-                ", parentLocation='" + parentLocation + '\'' +
-                ", tobaccoInfo='" + tobaccoInfo + '\'' +
-                '}';
-    }
+
 }

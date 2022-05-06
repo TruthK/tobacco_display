@@ -78,6 +78,11 @@ public class BakingRecord {
     @JsonProperty("tobacco_info")
     private String tobaccoInfo;
 
+    @JsonProperty("bake_pic_before")
+    private String bakePicBefore;
+    @JsonProperty("bake_pic_after")
+    private String bakePicAfter;
+
     @JsonProperty("farmer_id")
     private String farmerId;
     @JsonProperty("technician_id")
@@ -338,4 +343,19 @@ public class BakingRecord {
         this.yellowRateLowerBound = yellowRateLowerBound;
     }
 
+    public String getBakePicBefore() {
+        return bakePicBefore;
+    }
+
+    public void setBakePicBefore(String bakePicBefore) {
+        this.bakePicBefore = bakePicBefore;
+    }
+
+    public String getBakePicAfter() {
+        return bakePicAfter;
+    }
+
+    public void setBakePicAfter(String bakePicAfter) {
+        this.bakePicAfter = bakePicAfter;
+    }
 }
