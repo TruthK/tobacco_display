@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.DeviceGroupMapper">
+
+    <!--根据多个条件找烤房-->
+    <select id="findDeviceGroupByOptions" resultType="DeviceGroup">
+        select dg.group_id,dg.station_id,
+        parent_location,location,
+        dg.head,dg.phone,info,
+        group_name,dg.address,station_name
+        from device_group dg left join stations s
+        on dg.station_id=s.station_id
+        <trim prefix="where" suffixOverrides="and">
+            <if test="phone != null ">dg.phone=#{phone,jdbcType=VARCHAR} and</if>
+            <if test="head != null ">dg.head=#{head,jdbcType=VARCHAR} and</if>
+            <if test="location != null ">location=#{location,jdbcType=VARCHAR} and</if>
+            <if test="parentLocation != null ">parent_location=#{parentLocation,jdbcType=VARCHAR} and</if>
+            <if test="stationId != null ">dg.station_id=#{stationId,jdbcType=VARCHAR} and</if>
+            <if test="groupId != null ">dg.group_id=#{groupId,jdbcType=VARCHAR} and</if>
+
+        </trim>
+    </select>
+
+    <update id="alterDeviceGroupInfo" parameterType="DeviceGroup">
+        update device_group
+        set
+        <trim prefix="" suffixOverrides=",">
+            <if test="groupName != null ">group_name=#{groupName} ,</if>
+            <if test="head != null ">head = #{head} ,</if>
+            <if test="phone != null ">phone=#{phone} ,</if>
+            <if test="info != null ">info=#{info} ,</if>
+            <if test="address != null ">address=#{address} ,</if>
+            <if test="stationId != null ">station_id=#{stationId} ,</if>
+        </trim>
+        where group_id = #{groupId}
+    </update>
+
+    <insert id="saveDeviceGroupInfo" parameterType="DeviceGroup">
+
+        INSERT INTO device_group (group_id, group_name,
+                                  head,phone,info,
+                                  address,station_id)
+        values (#{groupId}, #{groupName},
+                #{head},#{phone},#{info},#{address},#{stationId})
+
+    </insert>
+
+    <delete id="deleteDeviceGroup" parameterType="DeviceGroup">
+        DELETE
+        FROM device_group
+        WHERE group_id = #{groupId}
+    </delete>
+
+</mapper>

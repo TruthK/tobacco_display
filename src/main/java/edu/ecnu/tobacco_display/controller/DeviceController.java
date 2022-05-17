@@ -1,7 +1,9 @@
 package edu.ecnu.tobacco_display.controller;
 
 
+import edu.ecnu.tobacco_display.model.entity.BakingRecord;
 import edu.ecnu.tobacco_display.model.entity.Device;
+import edu.ecnu.tobacco_display.service.BakingService;
 import edu.ecnu.tobacco_display.service.DeviceService;
 import edu.ecnu.tobacco_display.utils.JsonData;
 import io.swagger.annotations.Api;
@@ -23,6 +25,9 @@ import java.util.Map;
 public class DeviceController {
     @Autowired
     private DeviceService deviceService;
+
+    @Autowired
+    private BakingService bakingRecordService;
 
 
     @PostMapping("addDevice")
@@ -53,6 +58,12 @@ public class DeviceController {
         return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("请确认输入无误");
     }
 
+    @PostMapping("bakingDevice")
+    @Operation(summary = "正在烘烤的")
+    public JsonData bakingDevice(@RequestBody Map<String, String> deviceInfo) {
+        List<BakingRecord> bakingRecords = bakingRecordService.CountBakingRecordsNumbers(deviceInfo);
+        return bakingRecords != null ? JsonData.buildSuccess(bakingRecords) : JsonData.buildError("请确认输入无误");
+    }
 
 
 }

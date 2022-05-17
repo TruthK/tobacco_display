@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.ecnu.tobacco_display.mapper.BakingMapper">
 
-    <!--根据多个条件找烘烤-->
+    <!--根据多个条件找烘烤info-->
     <select id="findBakingRecordsByOptions" resultType="BakingRecord">
         SELECT
         b.id,
@@ -12,6 +12,7 @@
         parent_location,
         station_id,
         b.device_id AS device_id,
+        group_id,
         baking_weight_before,
         baking_weight_after,
         farmer_id,
@@ -24,7 +25,13 @@
         noise_rate,
         yellow_rate,
         bake_pic_before,
-        bake_pic_after
+        bake_pic_after,
+        water_rate,
+        single_leaf_before,
+        single_leaf_after,
+        leaf_area,
+        install_way,
+        tobacco_info
         FROM
         (
         SELECT
@@ -35,6 +42,7 @@
         parent_location,
         station_id,
         br.device_id AS device_id,
+        group_id,
         baking_weight_before,
         baking_weight_after,
         farmer_id,
@@ -45,11 +53,17 @@
         noise_rate,
         yellow_rate,
         bake_pic_before,
-        bake_pic_after
+        bake_pic_after,
+        water_rate,
+        single_leaf_before,
+        single_leaf_after,
+        leaf_area,
+        install_way,
+        tobacco_info
         FROM
         baking_records br
         LEFT JOIN ( SELECT location, parent_location,
-        device_id, binfo.station_id
+        device_id, group_id,binfo.station_id
         FROM bakehouse_info binfo LEFT JOIN stations
         s ON binfo.station_id = s.station_id ) bi ON br.device_id = bi.device_id
         ) b
@@ -70,6 +84,9 @@
             <if test="stationId != null ">station_id = #{stationId,jdbcType=VARCHAR} and</if>
 
             <if test="deviceId != null ">device_id=#{deviceId,jdbcType=VARCHAR} and</if>
+            <if test="groupId != null ">group_id=#{groupId,jdbcType=VARCHAR} and</if>
+
+
             <if test="farmerId != null ">
                 (farmer_id=#{farmerId,jdbcType=VARCHAR}
                 or phone=#{farmerId,jdbcType=VARCHAR}) and
@@ -93,6 +110,9 @@
 
             <if test="yellowRateUpperBound >0 ">yellow_rate &lt;= #{yellowRateUpperBound,jdbcType=DOUBLE} and</if>
             <if test="yellowRateLowerBound  >0 ">yellow_rate &gt;= #{yellowRateLowerBound,jdbcType=DOUBLE} and</if>
+
+            <if test="leafArea != null ">leaf_area=#{leafArea,jdbcType=VARCHAR} and</if>
+            <if test="installWay != null ">install_way=#{installWay,jdbcType=VARCHAR} and</if>
 
         </trim>
     </select>
@@ -118,7 +138,9 @@
             <if test="deviceId != null ">
                 device_id=#{deviceId,jdbcType=VARCHAR} ,
             </if>
-
+            <if test="groupId != null ">
+                group_id=#{groupId,jdbcType=VARCHAR} ,
+            </if>
             <if test="bakingWeightBefore >0 ">
                 baking_weight_before=#{bakingWeightBefore,jdbcType=DOUBLE} ,
             </if>
@@ -129,16 +151,16 @@
                 score=#{score,jdbcType=DOUBLE} ,
             </if>
             <if test="lossRate >0 ">
-                score=#{loss_rate,jdbcType=DOUBLE} ,
+                loss_rate=#{lossRate,jdbcType=DOUBLE} ,
             </if>
             <if test="cyanosisRate >0 ">
-                score=#{cyanosis_rate,jdbcType=DOUBLE} ,
+                cyanosis_rate=#{cyanosisRate,jdbcType=DOUBLE} ,
             </if>
             <if test="noiseRate >0 ">
-                score=#{noise_rate,jdbcType=DOUBLE} ,
+                noise_rate=#{noiseRate,jdbcType=DOUBLE} ,
             </if>
             <if test="yellowRate >0 ">
-                score=#{yellow_rate,jdbcType=DOUBLE} ,
+                yellow_rate=#{yellowRate,jdbcType=DOUBLE} ,
             </if>
             <if test="tobaccoInfo != null ">
                 tobacco_info=#{tobaccoInfo,jdbcType=VARCHAR} ,
@@ -152,7 +174,21 @@
                 bake_pic_after=#{bakePicAfter,jdbcType=VARCHAR} ,
             </if>
 
-
+            <if test="waterRate >0 ">
+                water_rate=#{waterRate,jdbcType=DOUBLE} ,
+            </if>
+            <if test="singleLeafBefore >0 ">
+                single_leaf_before=#{singleLeafBefore,jdbcType=DOUBLE} ,
+            </if>
+            <if test="singleLeafAfter >0 ">
+                single_leaf_after=#{singleLeafAfter} ,
+            </if>
+            <if test="leafArea != null ">
+                leaf_area=#{leafArea} ,
+            </if>
+            <if test="installWay != null ">
+                install_way=#{installWay} ,
+            </if>
         </trim>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -169,7 +205,12 @@
                                     cyanosis_rate,
                                     noise_rate,
                                     yellow_rate, bake_pic_before,
-                                    bake_pic_after)
+                                    bake_pic_after,
+                                    water_rate,
+                                    single_leaf_before,
+                                    single_leaf_after,
+                                    leaf_area,
+                                    install_way)
         values (#{deviceId,jdbcType=VARCHAR},
                 #{startTime,jdbcType=TIMESTAMP},
                 #{endTime,jdbcType=TIMESTAMP},
@@ -184,7 +225,12 @@
                 #{noiseRate,jdbcType=DOUBLE},
                 #{yellowRate,jdbcType=DOUBLE},
                 #{bakePicBefore,jdbcType=VARCHAR},
-                #{bakePicAfter,jdbcType=VARCHAR})
+                #{bakePicAfter,jdbcType=VARCHAR},
+                #{waterRate,jdbcType=DOUBLE},
+                #{singleLeafBefore,jdbcType=DOUBLE},
+                #{singleLeafAfter,jdbcType=DOUBLE},
+                #{leafArea,jdbcType=VARCHAR},
+                #{installWay,jdbcType=VARCHAR})
 
     </insert>
 
@@ -193,5 +239,37 @@
         FROM baking_records
         WHERE id = #{id,jdbcType=VARCHAR}
     </delete>
+
+
+    <!--根据多个条件找烘烤info-->
+    <select id="CountBakingRecordsNumbers" resultType="BakingRecord">
+        SELECT
+        start_time,
+        end_time,
+        location,
+        parent_location,
+        station_id,
+        br.device_id AS device_id,
+        group_id,
+        baking_weight_before,
+        baking_weight_after,
+        tobacco_info from
+        baking_records br
+        LEFT JOIN ( SELECT location, parent_location,
+        device_id, group_id,binfo.station_id
+        FROM bakehouse_info binfo LEFT JOIN stations
+        s ON binfo.station_id = s.station_id ) bi ON br.device_id = bi.device_id
+
+        <trim prefix="where" suffixOverrides="and">
+            <if test="findStartTime != null ">start_time &gt;= #{findStartTime,jdbcType=TIMESTAMP} and</if>
+            end_time is null and
+            <if test="findStartTime != null ">start_time &gt;= #{findStartTime,jdbcType=TIMESTAMP} and</if>
+            <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
+            <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
+            <if test="stationId != null ">station_id = #{stationId,jdbcType=VARCHAR} and</if>
+            <if test="deviceId != null ">br.device_id=#{deviceId,jdbcType=VARCHAR} and</if>
+            <if test="groupId != null ">group_id=#{groupId,jdbcType=VARCHAR} and</if>
+        </trim>
+    </select>
 
 </mapper>

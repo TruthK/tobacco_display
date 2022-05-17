@@ -59,6 +59,19 @@ public class BakingRecord {
     @JsonProperty("noise_rate_lower_bound")
     private double noiseRateLowerBound;
 
+    @JsonProperty("water_rate")
+    private double waterRate;
+
+    @JsonProperty("single_leaf_before")
+    private double singleLeafBefore;
+    @JsonProperty("single_leaf_after")
+    private double singleLeafAfter;
+
+    @JsonProperty("leaf_area")
+    private String leafArea;
+    @JsonProperty("install_way")
+    private String installWay;
+
 
     @JsonProperty("yellow_rate")
     private double yellowRate;
@@ -74,6 +87,10 @@ public class BakingRecord {
     private String parentLocation;
     @JsonProperty("station_id")
     private String stationId;
+
+
+    @JsonProperty("group_id")
+    private String groupId;
 
     @JsonProperty("tobacco_info")
     private String tobaccoInfo;
@@ -169,6 +186,14 @@ public class BakingRecord {
 
     public double getBakingWeightAfter() {
         return bakingWeightAfter;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
     public void setBakingWeightAfter(double bakingWeightAfter) {
@@ -357,5 +382,45 @@ public class BakingRecord {
 
     public void setBakePicAfter(String bakePicAfter) {
         this.bakePicAfter = bakePicAfter;
+    }
+
+    public double getWaterRate() {
+        return waterRate;
+    }
+
+    public void setWaterRate(double waterRate) {
+        this.waterRate = waterRate;
+    }
+
+    public double getSingleLeafBefore() {
+        return singleLeafBefore;
+    }
+
+    public void setSingleLeafBefore(double singleLeafBefore) {
+        this.singleLeafBefore = singleLeafBefore;
+    }
+
+    public double getSingleLeafAfter() {
+        return singleLeafAfter;
+    }
+
+    public void setSingleLeafAfter(double singleLeafAfter) {
+        this.singleLeafAfter = singleLeafAfter;
+    }
+
+    public String getLeafArea() {
+        return leafArea;
+    }
+
+    public void setLeafArea(String leafArea) {
+        this.leafArea = leafArea;
+    }
+
+    public String getInstallWay() {
+        return installWay;
+    }
+
+    public void setInstallWay(String installWay) {
+        this.installWay = installWay;
     }
 }

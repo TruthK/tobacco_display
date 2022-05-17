@@ -4,7 +4,7 @@
 
     <!--根据多个条件找烤房-->
     <select id="findCurveByOptions" resultType="Curve">
-        select kind,dry_or_wet,curve
+        select id,kind,dry_or_wet,curve
         from curve
         <trim prefix="where" suffixOverrides="and">
             <if test="kind != null ">kind=#{kind} and</if>

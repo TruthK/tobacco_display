@@ -33,6 +33,12 @@ public class Device {
     @JsonProperty("kind")
     private int kind;
 
+    @JsonProperty("sensors")
+    private String sensors;
+    @JsonProperty("group_id")
+    private String groupId;
+
+
     @JsonProperty("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
@@ -40,19 +46,6 @@ public class Device {
     public Device() {
     }
 
-    public Device(String deviceId, String deviceName, String stationId, String stationName, String location, String parentLocation, String address, String head, String headPhone, int kind, Date createTime) {
-        this.deviceId = deviceId;
-        this.deviceName = deviceName;
-        this.stationId = stationId;
-        this.stationName = stationName;
-        this.location = location;
-        this.parentLocation = parentLocation;
-        this.address = address;
-        this.head = head;
-        this.headPhone = headPhone;
-        this.kind = kind;
-        this.createTime = createTime;
-    }
 
     @Override
     public String toString() {
@@ -69,6 +62,22 @@ public class Device {
                 ", kind=" + kind +
                 ", createTime=" + createTime +
                 '}';
+    }
+
+    public String getSensors() {
+        return sensors;
+    }
+
+    public void setSensors(String sensors) {
+        this.sensors = sensors;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
     public String getStationName() {

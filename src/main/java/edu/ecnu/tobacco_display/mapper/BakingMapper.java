@@ -22,6 +22,8 @@ public interface BakingMapper {
 
     List<BakingRecord> findBakingRecordsByOptions(BakingRecord bakingRecord);
 
+    List<BakingRecord> CountBakingRecordsNumbers(BakingRecord bakingRecord);
+
     int alterBakingRecord(BakingRecord bakingRecord);
 
     int saveBakingRecord(BakingRecord bakingRecord);

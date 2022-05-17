@@ -42,9 +42,15 @@ public class BakingServiceImpl implements BakingService {
     @Override
     public List<BakingRecord> findBakingRecordsByOptions(Map<String, String> queryOptions) {
         BakingRecord bakingRecord = parseToBakingRecord(queryOptions);
-        System.out.println(bakingRecord.toString());
         List<BakingRecord> bakingRecordsList = bakingMapper.findBakingRecordsByOptions(bakingRecord);
         return bakingRecordsList;
+    }
+
+    @Override
+    public List<BakingRecord> CountBakingRecordsNumbers(Map<String, String> queryOptions) {
+        BakingRecord bakingRecord = parseToBakingRecord(queryOptions);
+        List<BakingRecord> bakingRecordList = bakingMapper.CountBakingRecordsNumbers(bakingRecord);
+        return bakingRecordList;
     }
 
     @Override

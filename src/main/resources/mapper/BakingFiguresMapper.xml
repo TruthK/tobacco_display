@@ -12,7 +12,10 @@
         avg(loss_rate) as loss_rate,
         avg(cyanosis_rate) as cyanosis_rate,
         avg(noise_rate) as noise_rate,
-        avg(yellow_rate) as yellow_rate
+        avg(yellow_rate) as yellow_rate,
+        avg(single_leaf_before) as single_leaf_before,
+        avg(single_leaf_after) as single_leaf_after,
+        avg(water_rate) as water_rate
         <if test="location != null ">
             ,station_id
         </if>

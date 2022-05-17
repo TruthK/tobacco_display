@@ -26,6 +26,8 @@ public interface BakingService {
 
     List<BakingRecord> findBakingRecordsByOptions(Map<String, String> queryOptions);
 
+    List<BakingRecord> CountBakingRecordsNumbers(Map<String, String> queryOptions);
+
     int alterBakingRecord(Map<String, String> queryOptions);
 
     int saveBakingRecord(Map<String, String> queryOptions);

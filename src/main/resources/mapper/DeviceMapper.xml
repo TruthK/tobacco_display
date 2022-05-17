@@ -6,7 +6,7 @@
     <select id="findDeviceByOptions" resultType="Device">
         select bi.device_id,bi.address,s.parent_location,
         s.location,bi.head,bi.head_phone,bi.kind,
-        bi.create_time,bi.device_name,s.station_id,
+        bi.create_time,bi.device_name,bi.sensors,bi.group_id,s.station_id,
         s.station_name
         from bakehouse_info bi left join stations s
         on bi.station_id=s.station_id
@@ -19,7 +19,9 @@
             <if test="location != null ">s.location=#{location,jdbcType=VARCHAR} and</if>
             <if test="parentLocation != null ">s.parent_location=#{parentLocation,jdbcType=VARCHAR} and</if>
             <if test="stationId != null ">bi.station_id=#{stationId,jdbcType=VARCHAR} and</if>
-        </trim>
+            <if test="groupId != null ">bi.group_id=#{groupId,jdbcType=VARCHAR} and</if>
+
+</trim>
     </select>
 
     <update id="alterDeviceInfo" parameterType="Device">
@@ -38,6 +40,12 @@
             <if test="stationId != null ">
                 station_id=#{stationId,jdbcType=VARCHAR} ,
             </if>
+            <if test="sensors != null ">
+                sensors=#{sensors,jdbcType=VARCHAR} ,
+            </if>
+            <if test="groupId != null ">
+                group_id=#{groupId,jdbcType=VARCHAR} ,
+            </if>
 
         </trim>
         where device_id = #{deviceId,jdbcType=VARCHAR}
@@ -47,7 +55,7 @@
 
         INSERT INTO bakehouse_info (device_id, device_name,
                                     head, head_phone, address, kind,
-                                    create_time, station_id)
+                                    create_time, station_id,group_id)
         values (#{deviceId,jdbcType=VARCHAR},
                 #{deviceName,jdbcType=VARCHAR},
                 #{head,jdbcType=VARCHAR},
@@ -55,7 +63,8 @@
                 #{address,jdbcType=VARCHAR},
                 #{kind,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP}),
-            #{stationId,jdbcType=VARCHAR})
+            #{stationId,jdbcType=VARCHAR},
+            #{groupId,jdbcType=VARCHAR})
 
     </insert>
 

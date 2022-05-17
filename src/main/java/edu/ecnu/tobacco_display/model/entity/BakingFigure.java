@@ -68,8 +68,39 @@ public class BakingFigure {
     @JsonProperty("tobacco_info")
     private String tobaccoInfo;
 
+    @JsonProperty("water_rate")
+    private double waterRate;
+
+    @JsonProperty("single_leaf_before")
+    private double singleLeafBefore;
+    @JsonProperty("single_leaf_after")
+    private double singleLeafAfter;
 
     public BakingFigure() {
+    }
+
+    public double getWaterRate() {
+        return waterRate;
+    }
+
+    public void setWaterRate(double waterRate) {
+        this.waterRate = waterRate;
+    }
+
+    public double getSingleLeafBefore() {
+        return singleLeafBefore;
+    }
+
+    public void setSingleLeafBefore(double singleLeafBefore) {
+        this.singleLeafBefore = singleLeafBefore;
+    }
+
+    public double getSingleLeafAfter() {
+        return singleLeafAfter;
+    }
+
+    public void setSingleLeafAfter(double singleLeafAfter) {
+        this.singleLeafAfter = singleLeafAfter;
     }
 
     public String getStationId() {
