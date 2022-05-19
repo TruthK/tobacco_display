@@ -14,4 +14,6 @@ public interface DetailRoastedTobaccoMapper {
      */
     List<DetailRoastedTobacco> findDetailByOptions(DetailRoastedTobacco queryOptionsRequest);
 
+    List<DetailRoastedTobacco> findNotContrast(DetailRoastedTobacco queryOptionsRequest);
+
 }

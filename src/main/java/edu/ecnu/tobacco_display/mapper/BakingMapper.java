@@ -24,6 +24,8 @@ public interface BakingMapper {
 
     List<BakingRecord> CountBakingRecordsNumbers(BakingRecord bakingRecord);
 
+    List<BakingRecord> SelectNotContrastRecords();
+
     int alterBakingRecord(BakingRecord bakingRecord);
 
     int saveBakingRecord(BakingRecord bakingRecord);

@@ -26,7 +26,6 @@ public class BakingController {
     @Autowired
     private BakingService bakingService;
 
-
     /**
      * 查询烤房警报数据.
      *

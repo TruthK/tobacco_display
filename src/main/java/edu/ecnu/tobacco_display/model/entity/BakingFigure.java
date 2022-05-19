@@ -76,11 +76,32 @@ public class BakingFigure {
     @JsonProperty("single_leaf_after")
     private double singleLeafAfter;
 
+    @JsonProperty("curve_kind")
+    private String curveKind;
+    @JsonProperty("curve_contrast")
+    private double curveContrast;
+
     public BakingFigure() {
     }
 
     public double getWaterRate() {
         return waterRate;
+    }
+
+    public String getCurveKind() {
+        return curveKind;
+    }
+
+    public void setCurveKind(String curveKind) {
+        this.curveKind = curveKind;
+    }
+
+    public double getCurveContrast() {
+        return curveContrast;
+    }
+
+    public void setCurveContrast(double curveContrast) {
+        this.curveContrast = curveContrast;
     }
 
     public void setWaterRate(double waterRate) {

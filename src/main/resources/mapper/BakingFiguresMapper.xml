@@ -15,7 +15,9 @@
         avg(yellow_rate) as yellow_rate,
         avg(single_leaf_before) as single_leaf_before,
         avg(single_leaf_after) as single_leaf_after,
-        avg(water_rate) as water_rate
+        avg(water_rate) as water_rate,
+        curve_kind,
+        avg(curve_contrast)  AS curve_contrast
         <if test="location != null ">
             ,station_id
         </if>
@@ -53,9 +55,11 @@
             <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
             <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
             <if test="stationId != null ">station_id = #{stationId} and</if>
+            <if test="curveKind != null ">curve_kind = #{curveKind} and</if>
+
         </trim>
         <trim prefix="group by" suffixOverrides=",">
-            tobacco_info, end_time,
+            tobacco_info, end_time,curve_kind,
             <if test="location != null">
                 station_id
             </if>

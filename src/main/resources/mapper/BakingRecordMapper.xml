@@ -31,7 +31,9 @@
         single_leaf_after,
         leaf_area,
         install_way,
-        tobacco_info
+        tobacco_info,
+        curve_kind,
+        curve_contrast
         FROM
         (
         SELECT
@@ -59,7 +61,9 @@
         single_leaf_after,
         leaf_area,
         install_way,
-        tobacco_info
+        tobacco_info,
+        curve_kind,
+        curve_contrast
         FROM
         baking_records br
         LEFT JOIN ( SELECT location, parent_location,
@@ -113,6 +117,8 @@
 
             <if test="leafArea != null ">leaf_area=#{leafArea,jdbcType=VARCHAR} and</if>
             <if test="installWay != null ">install_way=#{installWay,jdbcType=VARCHAR} and</if>
+
+            <if test="curveKind != null ">curve_kind=#{curveKind,jdbcType=VARCHAR} and</if>
 
         </trim>
     </select>
@@ -189,6 +195,12 @@
             <if test="installWay != null ">
                 install_way=#{installWay} ,
             </if>
+            <if test="curveKind != null ">
+                curve_kind=#{curveKind} ,
+            </if>
+            <if test="curveContrast >=0 ">
+                curve_contrast=#{curveContrast,jdbcType=DOUBLE} ,
+            </if>
         </trim>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -210,7 +222,9 @@
                                     single_leaf_before,
                                     single_leaf_after,
                                     leaf_area,
-                                    install_way)
+                                    install_way,
+                                    curve_kind,
+                                    curve_contrast)
         values (#{deviceId,jdbcType=VARCHAR},
                 #{startTime,jdbcType=TIMESTAMP},
                 #{endTime,jdbcType=TIMESTAMP},
@@ -230,7 +244,9 @@
                 #{singleLeafBefore,jdbcType=DOUBLE},
                 #{singleLeafAfter,jdbcType=DOUBLE},
                 #{leafArea,jdbcType=VARCHAR},
-                #{installWay,jdbcType=VARCHAR})
+                #{installWay,jdbcType=VARCHAR},
+                #{curveKind,jdbcType=VARCHAR},
+                #{curveContrast,jdbcType=DOUBLE})
 
     </insert>
 
@@ -270,6 +286,20 @@
             <if test="deviceId != null ">br.device_id=#{deviceId,jdbcType=VARCHAR} and</if>
             <if test="groupId != null ">group_id=#{groupId,jdbcType=VARCHAR} and</if>
         </trim>
+    </select>
+
+    <!--查询没有计算对比程序的记录-->
+    <select id="SelectNotContrastRecords" resultType="BakingRecord">
+        SELECT id,
+               start_time,
+               end_time,
+               device_id,
+               curve_kind
+        from baking_records
+        where curve_kind is not null
+          and curve_contrast is null
+          and start_time is not null
+          and end_time is not null
     </select>
 
 </mapper>

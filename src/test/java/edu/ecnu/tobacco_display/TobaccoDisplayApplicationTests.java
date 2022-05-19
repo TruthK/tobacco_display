@@ -2,6 +2,7 @@ package edu.ecnu.tobacco_display;
 
 import com.alibaba.fastjson.JSON;
 import edu.ecnu.tobacco_display.model.entity.CityMap;
+import edu.ecnu.tobacco_display.scheduling.CurveContrastScheduling;
 import edu.ecnu.tobacco_display.utils.ReadFromFile;
 import edu.ecnu.tobacco_display.utils.SerializeUtil;
 import org.junit.jupiter.api.Test;
@@ -16,9 +17,18 @@ class TobaccoDisplayApplicationTests {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Autowired
+    private CurveContrastScheduling contrast;
+
     @Test
     void contextLoads() {
     }
+
+    @Test
+    public void contrastscheduling() throws Exception {
+        contrast.execute();
+    }
+
 
     @Test
     public void test() throws UnsupportedEncodingException {

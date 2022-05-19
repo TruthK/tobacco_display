@@ -19,14 +19,36 @@
             <if test="wetBallTempUpperBound >0 ">wet_ball_Temp &lt;= #{wetBallTempUpperBound,jdbcType=DOUBLE} and</if>
             <if test="wetBallTempLowerBound >0 ">wet_ball_Temp &gt;= #{wetBallTempLowerBound,jdbcType=DOUBLE} and</if>
 
-            <if test="dryBallTargetUpperBound >0 ">dry_ball_target &lt;= #{dryBallTargetUpperBound,jdbcType=DOUBLE} and</if>
-            <if test="dryBallTargetLowerBound >0 ">dry_ball_target &gt;= #{dryBallTargetLowerBound,jdbcType=DOUBLE} and</if>
+            <if test="dryBallTargetUpperBound >0 ">dry_ball_target &lt;= #{dryBallTargetUpperBound,jdbcType=DOUBLE}
+                and
+            </if>
+            <if test="dryBallTargetLowerBound >0 ">dry_ball_target &gt;= #{dryBallTargetLowerBound,jdbcType=DOUBLE}
+                and
+            </if>
 
-            <if test="wetBallTargetUpperBound >0 ">wet_ball_target &lt;= #{wetBallTargetUpperBound,jdbcType=DOUBLE} and</if>
-            <if test="wetBallTargetLowerBound >0 ">wet_ball_target &gt;= #{wetBallTargetLowerBound,jdbcType=DOUBLE} and</if>
+            <if test="wetBallTargetUpperBound >0 ">wet_ball_target &lt;= #{wetBallTargetUpperBound,jdbcType=DOUBLE}
+                and
+            </if>
+            <if test="wetBallTargetLowerBound >0 ">wet_ball_target &gt;= #{wetBallTargetLowerBound,jdbcType=DOUBLE}
+                and
+            </if>
 
         </trim>
         limit 1000
+    </select>
+
+    <select id="findNotContrast" resultType="DetailRoastedTobacco">
+        SELECT dry_ball_target  from (
+        select dry_ball_target,
+        count(dry_ball_target) as dry_ball_target_count
+        from bakehouse_sensors_records
+        <trim prefix="where" suffixOverrides="and">
+            <if test="startTime != null ">produce_date &gt;= #{startTime,jdbcType=TIMESTAMP} and</if>
+            <if test="endTime != null ">produce_date &lt;= #{endTime,jdbcType=TIMESTAMP} and</if>
+            <if test="deviceId != null ">device_id = #{deviceId,jdbcType=VARCHAR} and</if>
+        </trim>
+        group by dry_ball_target) b
+        WHERE dry_ball_target_count>12
     </select>
 
 

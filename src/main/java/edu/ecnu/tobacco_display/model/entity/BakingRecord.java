@@ -95,6 +95,11 @@ public class BakingRecord {
     @JsonProperty("tobacco_info")
     private String tobaccoInfo;
 
+    @JsonProperty("curve_kind")
+    private String curveKind;
+    @JsonProperty("curve_contrast")
+    private double curveContrast;
+
     @JsonProperty("bake_pic_before")
     private String bakePicBefore;
     @JsonProperty("bake_pic_after")
@@ -422,5 +427,21 @@ public class BakingRecord {
 
     public void setInstallWay(String installWay) {
         this.installWay = installWay;
+    }
+
+    public String getCurveKind() {
+        return curveKind;
+    }
+
+    public void setCurveKind(String curveKind) {
+        this.curveKind = curveKind;
+    }
+
+    public double getCurveContrast() {
+        return curveContrast;
+    }
+
+    public void setCurveContrast(double curveContrast) {
+        this.curveContrast = curveContrast;
     }
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.ecnu.tobacco_display.mapper.DeviceGroupMapper">
 
-    <!--根据多个条件找烤房-->
+    <!--根据多个条件找烤房群-->
     <select id="findDeviceGroupByOptions" resultType="DeviceGroup">
         select dg.group_id,dg.station_id,
         parent_location,location,
@@ -20,7 +20,7 @@
 
         </trim>
     </select>
-
+    <!--修改信息-->
     <update id="alterDeviceGroupInfo" parameterType="DeviceGroup">
         update device_group
         set
@@ -34,7 +34,7 @@
         </trim>
         where group_id = #{groupId}
     </update>
-
+    <!--保持信息-->
     <insert id="saveDeviceGroupInfo" parameterType="DeviceGroup">
 
         INSERT INTO device_group (group_id, group_name,
@@ -44,7 +44,7 @@
                 #{head},#{phone},#{info},#{address},#{stationId})
 
     </insert>
-
+    <!--删除信息-->
     <delete id="deleteDeviceGroup" parameterType="DeviceGroup">
         DELETE
         FROM device_group
