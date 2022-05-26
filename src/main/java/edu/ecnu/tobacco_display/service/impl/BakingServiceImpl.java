@@ -31,6 +31,34 @@ public class BakingServiceImpl implements BakingService {
         List<BakingWarning> warningList = bakingMapper.findWarningsByOptions(warning);
         return warningList;
     }
+    @Override
+    public List<BakingWarning> findDetailWarnings(Map<String, String> queryOptions) {
+        BakingWarning warning = parseToWarning(queryOptions);
+        List<BakingWarning> warningList = bakingMapper.findDetailWarnings(warning);
+        return warningList;
+    }
+
+
+    @Override
+    public int alterWarning(Map<String, String> queryOptions) {
+        BakingWarning warning = parseToWarning(queryOptions);
+        if (warning != null) {
+            return bakingMapper.alterWarning(warning);
+        } else {
+            return -1;
+        }
+    }
+
+    @Override
+    public int addWarning(Map<String, String> queryOptions) {
+        BakingWarning warning = parseToWarning(queryOptions);
+        if (warning != null) {
+            return bakingMapper.addWarning(warning);
+        } else {
+            return -1;
+        }
+    }
+
 
     @Override
     public List<BakingFigure> findBakingFiguresByOptions(Map<String, String> queryOptions) {

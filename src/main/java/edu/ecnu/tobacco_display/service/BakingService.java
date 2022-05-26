@@ -20,10 +20,16 @@ public interface BakingService {
      * @param queryOptions
      * @return
      */
+//    警报
     List<BakingWarning> findWarningsByOptions(Map<String, String> queryOptions);
+    List<BakingWarning> findDetailWarnings(Map<String, String> queryOptions);
+    int alterWarning(Map<String, String> queryOptions);
+    int addWarning(Map<String, String> bakingRecordInfo);
 
+    //    统计
     List<BakingFigure> findBakingFiguresByOptions(Map<String, String> queryOptions);
 
+    //    记录
     List<BakingRecord> findBakingRecordsByOptions(Map<String, String> queryOptions);
 
     List<BakingRecord> CountBakingRecordsNumbers(Map<String, String> queryOptions);
@@ -33,6 +39,5 @@ public interface BakingService {
     int saveBakingRecord(Map<String, String> queryOptions);
 
     int deleteBakingRecord(Map<String, String> queryOptions);
-
 
 }

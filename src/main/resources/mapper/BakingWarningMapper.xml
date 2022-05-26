@@ -9,38 +9,30 @@
         sum(warning_4) as warning_4,
         sum(warning_5) as warning_5,
         sum(warning_6) as warning_6,
-        sum(warning_7) as warning_7
-        <if test="stationId != null or
+        sum(warning_7) as warning_7,
+        sum(overcome) as overcome
+        <if test="groupId != null or
             deviceId != null ">
-               ,bw.device_id
+            ,bw.device_id
+        </if>
+        <if test="stationId != null ">
+            ,group_id
         </if>
         <if test="location != null ">
-            ,bi.station_id
+            ,station_id
         </if>
         <if test="parentLocation != null ">
-               ,location
+            ,location
         </if>
         <if test="deviceId == null and stationId == null and location == null and
             parentLocation == null ">
-               ,parent_location
+            ,parent_location
         </if>
         from
-        baking_warning bw LEFT JOIN (SELECT
-        baking_weight_before,
-        baking_weight_after,
-        tobacco_info,
-        br.device_id,
-        DATE_FORMAT( end_time, '%Y-%m-%d' ) AS end_time,
-        score,location,parent_location,
-        bs.station_id
-        FROM
-        baking_records br
-        LEFT JOIN
-        ( SELECT location, parent_location,
-        device_id, bi.station_id
-        FROM bakehouse_info bi LEFT JOIN stations
-        s ON bi.station_id = s.station_id ) bs
-        ON br.device_id = bs.device_id) bi
+        baking_warning bw JOIN ( SELECT location, parent_location,
+        device_id, group_id,binfo.station_id
+        FROM bakehouse_info binfo LEFT JOIN stations
+        s ON binfo.station_id = s.station_id )  bi
         on bw.device_id=bi.device_id
         <trim prefix="where" suffixOverrides="and">
             <if test="startTime != null ">warning_time &gt;= #{startTime,jdbcType=TIMESTAMP} and</if>
@@ -48,26 +40,80 @@
             <if test="location != null ">location = #{location,jdbcType=VARCHAR} and</if>
             <if test="parentLocation != null ">parent_location = #{parentLocation,jdbcType=VARCHAR} and</if>
             <if test="deviceId != null ">bw.device_id = #{deviceId,jdbcType=VARCHAR} and</if>
-            <if test="stationId != null ">bi.station_id = #{stationId} and</if>
+            <if test="stationId != null ">station_id = #{stationId} and</if>
+            <if test="groupId != null ">group_id = #{stationId} and</if>
         </trim>
         <trim prefix="group by" suffixOverrides=",">
+            <if test="groupId != null">
+                bw.device_id
+            </if>
             <if test="stationId != null">
-            bw.device_id
+                group_id
             </if>
             <if test="location != null">
-                bi.station_id
+                station_id
             </if>
             <if test="parentLocation != null">
-            location
+                location
             </if>
             <if test="deviceId == null and stationId == null and location == null and
             parentLocation == null ">
-            parent_location
+                parent_location
             </if>
 
         </trim>
         limit 1000
     </select>
 
+    <select id="findDetailWarnings" resultType="BakingWarning">
+        select warning_1,
+        warning_2,
+        warning_3,
+        warning_4,
+        warning_5,
+        warning_6,
+        warning_7,
+        overcome,
+        warning_time,
+        device_id
+        from
+        baking_warning
+        <trim prefix="where" suffixOverrides="and">
+            <if test="startTime != null ">warning_time &gt;= #{startTime,jdbcType=TIMESTAMP} and</if>
+            <if test="endTime != null ">warning_time &lt;= #{endTime,jdbcType=TIMESTAMP} and</if>
+            <if test="deviceId != null ">device_id = #{deviceId,jdbcType=VARCHAR} and</if>
+        </trim>
+        limit 1000
+    </select>
+
+    <update id="alterWarning" parameterType="BakingWarning">
+        update baking_warning
+        set overcome = #{overcome}
+        where id = #{id}
+    </update>
+
+    <insert id="addWarning" parameterType="BakingWarning">
+
+        INSERT INTO baking_warning (warning_1,
+                                    warning_2,
+                                    warning_3,
+                                    warning_4,
+                                    warning_5,
+                                    warning_6,
+                                    warning_7,
+                                    overcome,
+                                    warning_time,
+                                    device_id)
+        values (#{warning1},
+                #{warning2},
+                #{warning3},
+                #{warning4},
+                #{warning5},
+                #{warning6},
+                #{warning7},
+                #{overcome},
+                #{warningTime,jdbcType=TIMESTAMP},
+                #{deviceId})
+    </insert>
 
 </mapper>

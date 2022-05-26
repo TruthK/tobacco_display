@@ -88,6 +88,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     private User parseToUser(Map<String, String> userInfo) {
+
         if (userInfo.containsKey("user_id")) {
             User user = new User();
             if (userInfo.containsKey("phone")) {

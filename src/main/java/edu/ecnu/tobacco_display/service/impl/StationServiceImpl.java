@@ -1,9 +1,12 @@
 package edu.ecnu.tobacco_display.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import edu.ecnu.tobacco_display.mapper.StationMapper;
+import edu.ecnu.tobacco_display.model.entity.Device;
 import edu.ecnu.tobacco_display.model.entity.Station;
 import edu.ecnu.tobacco_display.service.StationService;
 import edu.ecnu.tobacco_display.service.StationService;
+import edu.ecnu.tobacco_display.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,28 +60,29 @@ public class StationServiceImpl implements StationService {
 
 
     private Station parseToStation(Map<String, String> stationInfo) {
-
-        Station station = new Station();
-
-        if (stationInfo.containsKey("station_id")) {
-            station.setStationId(stationInfo.get("station_id"));
-        }
-
-        if (stationInfo.containsKey("station_name")) {
-            station.setStationName(stationInfo.get("station_name"));
-        }
-
-        if (stationInfo.containsKey("address")) {
-            station.setAddress(stationInfo.get("address"));
-        }
-
-        if (stationInfo.containsKey("location")) {
-            station.setLocation(stationInfo.get("location"));
-        }
-
-        if (stationInfo.containsKey("parent_location")) {
-            station.setParentLocation(stationInfo.get("parent_location"));
-        }
+        stationInfo = CommonUtils.formatHumpName(stationInfo);
+        Station station = JSONObject.parseObject(JSONObject.toJSONString(stationInfo), Station.class);
+//        Station station = new Station();
+//
+//        if (stationInfo.containsKey("station_id")) {
+//            station.setStationId(stationInfo.get("station_id"));
+//        }
+//
+//        if (stationInfo.containsKey("station_name")) {
+//            station.setStationName(stationInfo.get("station_name"));
+//        }
+//
+//        if (stationInfo.containsKey("address")) {
+//            station.setAddress(stationInfo.get("address"));
+//        }
+//
+//        if (stationInfo.containsKey("location")) {
+//            station.setLocation(stationInfo.get("location"));
+//        }
+//
+//        if (stationInfo.containsKey("parent_location")) {
+//            station.setParentLocation(stationInfo.get("parent_location"));
+//        }
 
         return station;
     }

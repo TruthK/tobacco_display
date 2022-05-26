@@ -18,6 +18,12 @@ public interface BakingMapper {
      */
     List<BakingWarning> findWarningsByOptions(BakingWarning bakingWarning);
 
+    List<BakingWarning> findDetailWarnings(BakingWarning bakingWarning);
+
+    int alterWarning(BakingWarning bakingWarning);
+
+    int addWarning(BakingWarning bakingWarning);
+
     List<BakingFigure> findBakingFiguresByOptions(BakingFigure bakingFigure);
 
     List<BakingRecord> findBakingRecordsByOptions(BakingRecord bakingRecord);

@@ -47,22 +47,6 @@ public class Device {
     }
 
 
-    @Override
-    public String toString() {
-        return "Device{" +
-                "deviceId='" + deviceId + '\'' +
-                ", deviceName='" + deviceName + '\'' +
-                ", stationId='" + stationId + '\'' +
-                ", stationName='" + stationName + '\'' +
-                ", location='" + location + '\'' +
-                ", parentLocation='" + parentLocation + '\'' +
-                ", address='" + address + '\'' +
-                ", head='" + head + '\'' +
-                ", headPhone='" + headPhone + '\'' +
-                ", kind=" + kind +
-                ", createTime=" + createTime +
-                '}';
-    }
 
     public String getSensors() {
         return sensors;

@@ -11,6 +11,8 @@ public class BakingWarning {
 
     @JsonProperty("device_id")
     private String deviceId;
+    @JsonProperty("group_id")
+    private String groupId;
     @JsonProperty("station_id")
     private String stationId;
     @JsonProperty("location")
@@ -18,6 +20,10 @@ public class BakingWarning {
     @JsonProperty("parent_location")
     private String parentLocation;
 
+    @JsonProperty("id")
+    private int id;
+    @JsonProperty("overcome")
+    private int overcome;
     @JsonProperty("warning_time")
     private Date warningTime;
 
@@ -44,41 +50,6 @@ public class BakingWarning {
     public BakingWarning() {
     }
 
-
-    public BakingWarning(String deviceId, String location, String parentLocation, Date warningTime, Date startTime, Date endTime, int warning1, int warning2, int warning3, int warning4, int warning5, int warning6, int warning7) {
-        this.deviceId = deviceId;
-        this.location = location;
-        this.parentLocation = parentLocation;
-        this.warningTime = warningTime;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.warning1 = warning1;
-        this.warning2 = warning2;
-        this.warning3 = warning3;
-        this.warning4 = warning4;
-        this.warning5 = warning5;
-        this.warning6 = warning6;
-        this.warning7 = warning7;
-    }
-
-    @Override
-    public String toString() {
-        return "BakingWarning{" +
-                "deviceId='" + deviceId + '\'' +
-                ", location='" + location + '\'' +
-                ", parentLocation='" + parentLocation + '\'' +
-                ", warningTime=" + warningTime +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", warning1=" + warning1 +
-                ", warning2=" + warning2 +
-                ", warning3=" + warning3 +
-                ", warning4=" + warning4 +
-                ", warning5=" + warning5 +
-                ", warning6=" + warning6 +
-                ", warning7=" + warning7 +
-                '}';
-    }
 
     public String getStationId() {
         return stationId;
@@ -192,4 +163,27 @@ public class BakingWarning {
         this.warningTime = warningTime;
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getOvercome() {
+        return overcome;
+    }
+
+    public void setOvercome(int overcome) {
+        this.overcome = overcome;
+    }
 }

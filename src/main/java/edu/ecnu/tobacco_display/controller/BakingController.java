@@ -39,7 +39,27 @@ public class BakingController {
         return warningList != null ? JsonData.buildSuccess(warningList) : JsonData.buildError("请确认输入无误");
     }
 
+    @PostMapping("findDetailWarnings")
+    @Operation(summary = "查询烤房警报数据")
+    public JsonData findDetailWarnings(@RequestBody Map<String, String> queryOptions) {
+        List<BakingWarning> warningList = bakingService.findDetailWarnings(queryOptions);
+        return warningList != null ? JsonData.buildSuccess(warningList) : JsonData.buildError("请确认输入无误");
+    }
 
+    @PostMapping("addWarning")
+    public JsonData addWarning(@RequestBody Map<String, String> bakingRecordInfo) {
+        int rows = bakingService.addWarning(bakingRecordInfo);
+        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("请确认输入无误");
+    }
+
+
+    @PostMapping("alterWarning")
+    public JsonData alterWarning(@RequestBody Map<String, String> bakingRecordInfo) {
+        int rows = bakingService.alterWarning(bakingRecordInfo);
+        return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("请确认输入无误");
+    }
+
+//    统计报表
     @PostMapping("findBakingFiguresByOptions")
     @Operation(summary = "findBakingFiguresByOptions")
     public JsonData findBakingFiguresByOptions(@RequestBody Map<String, String> bakingFigureInfo) {

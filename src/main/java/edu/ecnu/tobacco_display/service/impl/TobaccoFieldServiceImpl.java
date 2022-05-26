@@ -1,10 +1,13 @@
 package edu.ecnu.tobacco_display.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import edu.ecnu.tobacco_display.mapper.FieldMapper;
 import edu.ecnu.tobacco_display.mapper.UserMapper;
 import edu.ecnu.tobacco_display.model.entity.Device;
 import edu.ecnu.tobacco_display.model.entity.Field;
+import edu.ecnu.tobacco_display.model.entity.Station;
 import edu.ecnu.tobacco_display.service.TobaccoFieldService;
+import edu.ecnu.tobacco_display.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,19 +57,20 @@ public class TobaccoFieldServiceImpl implements TobaccoFieldService {
     }
 
     private Field parseToField(Map<String, String> fieldInfo) {
-        Field field = new Field();
-        if (fieldInfo.containsKey("field_id")) {
-            field.setFieldId(fieldInfo.get("field_id"));
-        }
-        if (fieldInfo.containsKey("location")) {
-            field.setLocation(fieldInfo.get("location"));
-        }
-        if (fieldInfo.containsKey("info")) {
-            field.setInfo(fieldInfo.get("info"));
-        }
-        if (fieldInfo.containsKey("owner")) {
-            field.setOwner(fieldInfo.get("owner"));
-        }
+        fieldInfo = CommonUtils.formatHumpName(fieldInfo);
+        Field field = JSONObject.parseObject(JSONObject.toJSONString(fieldInfo), Field.class);
+//        if (fieldInfo.containsKey("field_id")) {
+//            field.setFieldId(fieldInfo.get("field_id"));
+//        }
+//        if (fieldInfo.containsKey("location")) {
+//            field.setLocation(fieldInfo.get("location"));
+//        }
+//        if (fieldInfo.containsKey("info")) {
+//            field.setInfo(fieldInfo.get("info"));
+//        }
+//        if (fieldInfo.containsKey("owner")) {
+//            field.setOwner(fieldInfo.get("owner"));
+//        }
         return field;
     }
 
