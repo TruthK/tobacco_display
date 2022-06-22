@@ -2,10 +2,13 @@ package edu.ecnu.tobacco_display.controller;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import edu.ecnu.tobacco_display.model.entity.Field;
 import edu.ecnu.tobacco_display.model.entity.LoginUser;
 import edu.ecnu.tobacco_display.model.entity.User;
 import edu.ecnu.tobacco_display.model.request.LoginRequest;
 import edu.ecnu.tobacco_display.service.UserService;
+import edu.ecnu.tobacco_display.utils.CommonUtils;
 import edu.ecnu.tobacco_display.utils.JsonData;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -31,13 +36,6 @@ public class UserController {
      */
     @PostMapping("register")
     @ApiOperation(value = "注册")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(paramType = "query", name = "nname", value = "用户昵称", dataTypeClass = String.class),
-//            @ApiImplicitParam(paramType = "query", name = "user_id", value = "用户id", dataTypeClass = String.class),
-//            @ApiImplicitParam(paramType = "query", name = "password", value = "密码", dataTypeClass = String.class),
-//            @ApiImplicitParam(paramType = "query", name = "phone", value = "手机号", dataTypeClass = String.class),
-//    }
-//    )
     public JsonData register(@RequestBody Map<String, String> userInfo) {
         int rows = userService.save(userInfo);
         return rows == 1 ? JsonData.buildSuccess() : JsonData.buildError("注册失败，请确认输入无误");
@@ -98,4 +96,28 @@ public class UserController {
         }
 
     }
+
+    /**
+     * 批量注册接口
+     *
+     * @param usersList
+     * @return
+     */
+    @PostMapping("batchRegister")
+    public JsonData batchRegister(@RequestBody List<Map<String, String>> usersList) {
+        ArrayList<User> failRegisterList = new ArrayList<>();
+        for (int i = 0; i < usersList.size(); i++) {
+            int rows = userService.save(usersList.get(i));
+            if(rows!=1){
+                Map<String, String> failUserMap = CommonUtils.formatHumpName(usersList.get(i));
+                User failedUser = JSONObject.parseObject(JSONObject.toJSONString(failUserMap), User.class);
+                failRegisterList.add(failedUser);
+            }
+        }
+
+        return failRegisterList.size() !=usersList.size() ? JsonData.buildSuccess(failRegisterList) :
+                JsonData.buildError(
+                "注册失败，请确认输入无误");
+    }
+
 }

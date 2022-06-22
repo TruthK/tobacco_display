@@ -32,7 +32,7 @@
         baking_warning bw JOIN ( SELECT location, parent_location,
         device_id, group_id,binfo.station_id
         FROM bakehouse_info binfo LEFT JOIN stations
-        s ON binfo.station_id = s.station_id )  bi
+        s ON binfo.station_id = s.station_id ) bi
         on bw.device_id=bi.device_id
         <trim prefix="where" suffixOverrides="and">
             <if test="startTime != null ">warning_time &gt;= #{startTime,jdbcType=TIMESTAMP} and</if>
@@ -66,7 +66,9 @@
     </select>
 
     <select id="findDetailWarnings" resultType="BakingWarning">
-        select warning_1,
+        select
+        id,
+        warning_1,
         warning_2,
         warning_3,
         warning_4,

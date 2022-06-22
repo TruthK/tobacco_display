@@ -36,11 +36,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
         /**
          * 拦截全部路径，这个跨域需要放在最上面
          */
-//        registry.addInterceptor(corsInterceptor()).addPathPatterns("/**");
-//
+        registry.addInterceptor(corsInterceptor()).addPathPatterns("/**");
+
 //        registry.addInterceptor(loginInterceptor()).addPathPatterns("/*/*/**")
 //                //不拦截哪些路径   斜杠一定要加
-//                .excludePathPatterns("/user/login", "/user/register");
+//                .excludePathPatterns("/user");
 //
 
         WebMvcConfigurer.super.addInterceptors(registry);

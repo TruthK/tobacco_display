@@ -1,6 +1,7 @@
 package edu.ecnu.tobacco_display.service.impl;
 
 
+import com.mysql.cj.result.Row;
 import edu.ecnu.tobacco_display.mapper.UserMapper;
 import edu.ecnu.tobacco_display.model.entity.LoginUser;
 import edu.ecnu.tobacco_display.model.entity.User;
@@ -10,6 +11,8 @@ import edu.ecnu.tobacco_display.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
 import java.util.Map;
 import java.util.Random;
@@ -26,7 +29,14 @@ public class UserServiceImpl implements UserService {
         User user = parseToUser(userInfo);
         if (user != null) {
             if (user.getNname() != null && user.getPhone() != null && user.getPassword() != null) {
-                return userMapper.save(user);
+                int row =-1;
+                try{
+                    row = userMapper.save(user);
+                }catch (Exception e){
+                    System.out.println(user.toString());
+                    return -1;
+                }
+                return row;
             }
         }
 

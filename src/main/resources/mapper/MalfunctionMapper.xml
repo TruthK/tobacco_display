@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="edu.ecnu.tobacco_display.mapper.MalfunctionMapper">
+
+    <!--根据多个条件找烤房-->
+    <select id="findMalfunctionByOptions" resultType="Malfunction">
+        SELECT
+        m.id as id,
+        m.device_id as device_id,
+        trouble_unit,
+        troubleshooting,
+        repair_price ,repair_merchant,
+        maintain_after_baking,
+        maintainer,
+        supervision,
+        monitors,
+        m.create_time,
+        address,
+        device_name,
+        station_id,
+        group_id,
+        GPS,
+        beneficiary_entity,
+        technician_id,
+        fuel_type,
+        specifications_room,
+        supplier_device,
+        airflow_mode,
+        structural_form
+        FROM
+        malfunction m
+        LEFT JOIN bakehouse_info d ON m.device_id = d.device_id
+        <trim prefix="where" suffixOverrides="and">
+            <if test="deviceId != null ">m.device_id = #{deviceId} and</if>
+            <if test="troubleUnit != null ">trouble_unit=#{troubleUnit} and</if>
+            <if test="id>0 ">id=#{id,jdbcType=INTEGER} and</if>
+            <if test="deviceName != null ">device_name=#{deviceName} and</if>
+            <if test="stationId!=null ">station_id=#{stationId} and</if>
+            <if test="groupId != null ">group_id=#{groupId} and</if>
+        </trim>
+    </select>
+
+    <update id="alterMalfunctionInfo" parameterType="Malfunction">
+        update malfunction
+        set
+        <trim prefix="" suffixOverrides=",">
+            <if test="deviceId != null ">
+                device_id = #{deviceId} ,
+            </if>
+            <if test="troubleUnit != null ">
+                trouble_unit=#{troubleUnit} ,
+            </if>
+            <if test="troubleshooting != null ">
+                troubleshooting=#{troubleshooting} ,
+            </if>
+            <if test="repairPrice != null ">
+                repair_price=#{repairPrice,jdbcType=DOUBLE} ,
+            </if>
+            <if test="repairMerchant != null ">
+                repair_merchant=#{repairMerchant} ,
+            </if>
+            <if test="maintainAfterBaking != null ">
+                maintain_after_baking=#{maintainAfterBaking} ,
+            </if>
+            <if test="maintainer != null ">
+                maintainer=#{maintainer} ,
+            </if>
+            <if test="supervision != null ">
+                supervision=#{supervision} ,
+            </if>
+            <if test="monitors != null ">
+                monitors=#{monitors} ,
+            </if>
+
+        </trim>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <insert id="saveMalfunctionInfo" parameterType="Malfunction">
+
+        INSERT INTO malfunction (device_id, trouble_unit,
+                                 troubleshooting, repair_price,
+                                 repair_merchant,
+                                 maintain_after_baking, maintainer,
+                                 supervision,
+                                 monitors, create_time)
+        values (#{deviceId},
+                #{troubleUnit},
+                #{troubleshooting},
+                #{repairPrice,jdbcType=DOUBLE},
+                #{repairMerchant},
+                #{maintainAfterBaking},
+                #{maintainer},
+                #{supervision},
+                #{monitors},
+                #{createTime,jdbcType=TIMESTAMP})
+
+    </insert>
+
+    <delete id="deleteMalfunction" parameterType="Malfunction">
+        DELETE
+        FROM malfunction
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+
+</mapper>

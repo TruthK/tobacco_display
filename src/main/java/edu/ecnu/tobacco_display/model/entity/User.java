@@ -49,7 +49,7 @@ public class User {
     private String category;
 
     @JsonProperty("permission_range")
-    @ApiModelProperty(value = "权限范围（烟站），针对烟站人员和普通用户",
+    @ApiModelProperty(value = "权限范围",
             required = false, example = "671000")
     private String permissionRange;
 
@@ -120,5 +120,19 @@ public class User {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "nname='" + nname + '\'' +
+                ", password='" + password + '\'' +
+                ", headImg='" + headImg + '\'' +
+                ", userId='" + userId + '\'' +
+                ", phone='" + phone + '\'' +
+                ", category='" + category + '\'' +
+                ", permissionRange='" + permissionRange + '\'' +
+                ", createTime=" + createTime +
+                '}';
     }
 }

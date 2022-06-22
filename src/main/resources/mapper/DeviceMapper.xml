@@ -6,9 +6,17 @@
     <select id="findDeviceByOptions" resultType="Device">
         select bi.device_id,bi.address,s.parent_location,
         s.location,bi.head,bi.head_phone,bi.kind,
-        bi.create_time,bi.device_name,bi.sensors,bi.group_id,s.station_id,
-        s.station_name
-        from bakehouse_info bi left join stations s
+        bi.create_time,bi.device_name,bi.sensors,bi.group_id,
+        bi.GPS,bi.elevation,bi.fuel_type,bi.specifications_room,
+        bi.supplier_device, bi.airflow_mode,bi.structural_form,
+        bi.beneficiary_entity,bi.technician_id,
+        technician_name,technician_phone,
+        s.station_id,s.station_name
+        from (select * from bakehouse_info bake_info
+        left join (select user_id,nname as technician_name,
+        phone as technician_phone
+        from user) u on bake_info.technician_id=u.user_id) bi
+        left join stations s
         on bi.station_id=s.station_id
         <trim prefix="where" suffixOverrides="and">
             <if test="head != null ">bi.head = #{head,jdbcType=VARCHAR} and</if>
@@ -21,7 +29,7 @@
             <if test="stationId != null ">bi.station_id=#{stationId,jdbcType=VARCHAR} and</if>
             <if test="groupId != null ">bi.group_id=#{groupId,jdbcType=VARCHAR} and</if>
 
-</trim>
+        </trim>
     </select>
 
     <update id="alterDeviceInfo" parameterType="Device">
@@ -46,6 +54,33 @@
             <if test="groupId != null ">
                 group_id=#{groupId,jdbcType=VARCHAR} ,
             </if>
+            <if test="GPS != null ">
+                GPS=#{GPS} ,
+            </if>
+            <if test="elevation != null ">
+                elevation=#{elevation} ,
+            </if>
+            <if test="fuelType != null ">
+                fuel_type=#{fuelType} ,
+            </if>
+            <if test="specificationsRoom != null ">
+                specifications_room=#{specificationsRoom} ,
+            </if>
+            <if test="supplierDevice != null ">
+                supplier_device=#{supplierDevice} ,
+            </if>
+            <if test="airflowMode != null ">
+                airflow_mode=#{airflowMode} ,
+            </if>
+            <if test="structuralForm != null ">
+                structural_form=#{structuralForm} ,
+            </if>
+            <if test="beneficiaryEntity != null ">
+                beneficiary_entity=#{beneficiaryEntity} ,
+            </if>
+            <if test="technicianId != null ">
+                technician_id=#{technicianId} ,
+            </if>
 
         </trim>
         where device_id = #{deviceId,jdbcType=VARCHAR}
@@ -54,17 +89,31 @@
     <insert id="saveDeviceInfo" parameterType="Device">
 
         INSERT INTO bakehouse_info (device_id, device_name,
-                                    head, head_phone, address, kind,
-                                    create_time, station_id,group_id)
+                                    head, head_phone, address,
+                                    kind,create_time, station_id,
+                                    group_id,GPS,elevation,
+                                    fuel_type,specifications_room,
+                                    supplier_device,airflow_mode,
+                                    structural_form,beneficiary_entity,
+                                    technician_id)
         values (#{deviceId,jdbcType=VARCHAR},
                 #{deviceName,jdbcType=VARCHAR},
                 #{head,jdbcType=VARCHAR},
                 #{headPhone,jdbcType=VARCHAR},
                 #{address,jdbcType=VARCHAR},
                 #{kind,jdbcType=VARCHAR},
-                #{createTime,jdbcType=TIMESTAMP}),
+                #{createTime,jdbcType=TIMESTAMP},
             #{stationId,jdbcType=VARCHAR},
-            #{groupId,jdbcType=VARCHAR})
+            #{groupId,jdbcType=VARCHAR},
+            #{GPS},
+            #{elevation},
+            #{fuelType},
+            #{specificationsRoom},
+            #{supplierDevice},
+            #{airflowMode},
+            #{structuralForm},
+            #{beneficiaryEntity},
+            #{technicianId})
 
     </insert>
 

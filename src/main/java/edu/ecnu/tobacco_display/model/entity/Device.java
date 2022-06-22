@@ -43,9 +43,33 @@ public class Device {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
+    @JsonProperty("GPS")
+    private String GPS;
+    @JsonProperty("elevation")
+    private String elevation;
+    @JsonProperty("fuel_type")
+    private String fuelType;
+    @JsonProperty("specifications_room")
+    private String specificationsRoom;
+    @JsonProperty("supplier_device")
+    private String supplierDevice;
+    @JsonProperty("airflow_mode")
+    private String airflowMode;
+    @JsonProperty("structural_form")
+    private String structuralForm;
+    @JsonProperty("beneficiary_entity")
+    private String beneficiaryEntity;
+
+    @JsonProperty("technician_id")
+    private String technicianId;
+    @JsonProperty("technician_name")
+    private String technicianName;
+    @JsonProperty("technician_phone")
+    private String technicianPhone;
+
+
     public Device() {
     }
-
 
 
     public String getSensors() {
@@ -152,4 +176,91 @@ public class Device {
         this.kind = kind;
     }
 
+    public String getGPS() {
+        return GPS;
+    }
+
+    public void setGPS(String GPS) {
+        this.GPS = GPS;
+    }
+
+    public String getElevation() {
+        return elevation;
+    }
+
+    public void setElevation(String elevation) {
+        this.elevation = elevation;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public String getSpecificationsRoom() {
+        return specificationsRoom;
+    }
+
+    public void setSpecificationsRoom(String specificationsRoom) {
+        this.specificationsRoom = specificationsRoom;
+    }
+
+    public String getSupplierDevice() {
+        return supplierDevice;
+    }
+
+    public void setSupplierDevice(String supplierDevice) {
+        this.supplierDevice = supplierDevice;
+    }
+
+    public String getAirflowMode() {
+        return airflowMode;
+    }
+
+    public void setAirflowMode(String airflowMode) {
+        this.airflowMode = airflowMode;
+    }
+
+    public String getStructuralForm() {
+        return structuralForm;
+    }
+
+    public void setStructuralForm(String structuralForm) {
+        this.structuralForm = structuralForm;
+    }
+
+    public String getBeneficiaryEntity() {
+        return beneficiaryEntity;
+    }
+
+    public void setBeneficiaryEntity(String beneficiaryEntity) {
+        this.beneficiaryEntity = beneficiaryEntity;
+    }
+
+    public String getTechnicianId() {
+        return technicianId;
+    }
+
+    public void setTechnicianId(String technicianId) {
+        this.technicianId = technicianId;
+    }
+
+    public String getTechnicianName() {
+        return technicianName;
+    }
+
+    public void setTechnicianName(String technicianName) {
+        this.technicianName = technicianName;
+    }
+
+    public String getTechnicianPhone() {
+        return technicianPhone;
+    }
+
+    public void setTechnicianPhone(String technicianPhone) {
+        this.technicianPhone = technicianPhone;
+    }
 }

@@ -46,7 +46,7 @@ public class DeviceServiceImpl implements DeviceService {
     public int saveDeviceInfo(Map<String, String> deviceInfo) {
         Device device = parseToDevice(deviceInfo);
         if (device != null) {
-            if (device.getDeviceId() != null && device.getHead() != null && device.getHeadPhone() != null) {
+            if (device.getDeviceId() != null) {
                 return deviceMapper.saveDeviceInfo(device);
             }
         }
